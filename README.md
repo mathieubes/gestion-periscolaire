@@ -29,6 +29,7 @@
 - [x] US-013 : En tant que parent, je souhaite consulter le menu a la cantine
 - [ ] US-014 : En tant qu'utilisateur de type "péri-scolaire", je souhaite consulter les details concernant les inscriptions aux activités
 - [x] US-015 : En tant que parent, je souhaite pouvoir télécharger une facture mensuelle
+- [x] US-016 : En tant que parent, je souhaite pouvoir simuler mon quotient familial
 
 > CRUD = Create Read Update Delete = Ajouter Lire Modifier Supprimer
 
