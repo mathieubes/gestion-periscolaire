@@ -1,4 +1,4 @@
-# Periscolaire
+# Gestion périscolaire
 
 - [ ] Accueil du matin
 - [ ] Goûter du soir 🥐
