@@ -4,13 +4,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping()
-public class checkHealth {
+import univevry.gestionperiscolaire.models.JSONResponse;
 
-  @GetMapping()
-  public String returnHealth() {
-    return "Ok";
-  }
+@RestController
+@RequestMapping("/")
+public class CheckHealthController {
+
+    @GetMapping
+    public JSONResponse checkHealth() {
+        return new JSONResponse("status", "OK");
+    }
 
 }
