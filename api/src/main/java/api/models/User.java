@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.hash.Hashing;
 
 public class User {
-  @JsonIgnore
   private UUID id;
-  
   private String firstname;
   private String lastname;
 
