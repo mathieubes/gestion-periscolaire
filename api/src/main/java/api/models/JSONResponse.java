@@ -1,10 +1,16 @@
 package api.models;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class JSONResponse {
   private String key;
-  private String message;
+  private Object message;
+  ObjectMapper objectMapper = new ObjectMapper();
 
-  public JSONResponse(String key, String message) {
+  public JSONResponse(String key, Object message) {
     this.key = key;
     this.message = message;
   }
@@ -13,8 +19,8 @@ public class JSONResponse {
     return this.key;
   }
 
-  public String getMessage() {
-    return this.message;
+  public String getMessage() throws JsonParseException, IOException {
+    return objectMapper.writeValueAsString(this.message);
   }
 
 }

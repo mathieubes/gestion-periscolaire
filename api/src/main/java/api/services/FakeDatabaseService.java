@@ -3,13 +3,21 @@ package api.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
 import api.models.User;
 
+@Service
+@Scope("singleton")
 public class FakeDatabaseService {
 
-  private static List<User> users = new ArrayList<User>();
+  private List<User> users = new ArrayList<User>();
 
-  public static void initializeFakeUsers() {
+  @PostConstruct
+  public void initializeFakeUsers() {
     var mathieu = new User("Mathieu", "BES", "pwdTest");
     var garik = new User("Garik", "DERMINJYAN", "flk");
     var florian = new User("Florian", "CARBONI", "dksjskj");
@@ -19,7 +27,7 @@ public class FakeDatabaseService {
     users.add(florian);
   }
 
-  public static List<User> getUsers() {
+  public List<User> getUsers() {
     return users;
   }
 
