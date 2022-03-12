@@ -20,7 +20,7 @@ public class JSONResponse {
   }
 
   public String getMessage() throws JsonParseException, IOException {
-    return objectMapper.writeValueAsString(this.message);
+    return (this.key + " : " + objectMapper.writeValueAsString(this.message));
   }
 
 }
