@@ -9,12 +9,6 @@ public class Parent extends User {
     this.fiscalNumber = fiscalNumber;
   }
 
-  public Parent(User user, float fiscalNumber) {
-    super(user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getAddress(),
-        user.getPhoneNumber());
-    this.fiscalNumber = fiscalNumber;
-  }
-
   public float getFiscalNumber() {
     return fiscalNumber;
   }

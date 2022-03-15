@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.models.Parent;
-import api.models.User;
 import api.services.FakeDatabaseService;
 import api.services.JsonService;
 
@@ -24,13 +23,6 @@ public class UserController {
 
   @Autowired
   FakeDatabaseService fakeDatabaseService;
-
-  @RequestMapping(value = "/", method = RequestMethod.GET)
-  public String getUsers() throws JsonProcessingException {
-    ArrayList<User> users = fakeDatabaseService.getUsers();
-    return jsonService.parseToJson("users", users);
-
-  }
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
   public String getParents() throws JsonProcessingException {
