@@ -1,23 +1,54 @@
 package api.services;
 
+import api.models.Entry;
+import api.models.EntryConverter;
 import api.models.EnvKey;
-import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
-@Service
-@Scope("singleton")
-public class EnvService {
-    private Dotenv dotenv;
+public class EnvService implements EntryConverter {
+    private Map<EnvKey, String> env;
 
-    @PostConstruct
-    public void init() {
-        this.dotenv = Dotenv.load();
+    public EnvService(String path) {
+        this.env = new HashMap<>();
+
+        try {
+            final var reader = getFileReader(path);
+            final var entries = readLinesAndGetEntries(reader);
+            entries.forEach(entry -> this.env.put((EnvKey) entry.getKey(), (String) entry.getValue()));
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
-    public String getValue(EnvKey key) {
-        return this.dotenv.get(key.name());
+    private Scanner getFileReader(String path) throws FileNotFoundException {
+        try {
+            final var file = new File(".env");
+            final var reader = new Scanner(file);
+            return reader;
+        } catch (FileNotFoundException e) {
+            throw e;
+        }
+    }
+
+    private List<Entry> readLinesAndGetEntries(Scanner reader) {
+        final List<Entry> entries = new ArrayList<>();
+        while (reader.hasNextLine()) {
+            final var entry = this.getEntryFromString(reader.nextLine(), "=");
+            entries.add(entry);
+        }
+        return entries;
+    }
+
+    @Override
+    public Entry getEntryFromString(String str, String delimiter) {
+        final var keyValue = str.split(delimiter);
+        return new Entry(EnvKey.valueOf(keyValue[0]), keyValue[1]);
+    }
+
+    public Map<EnvKey, String> getEnv() {
+        return this.env;
     }
 }

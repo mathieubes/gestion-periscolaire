@@ -3,6 +3,8 @@ package api.models;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
+import api.services.EnvGlobalUseService;
+import api.services.EnvService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.hash.Hashing;
 
@@ -11,7 +13,7 @@ public abstract class User {
   private String firstname;
   private String lastname;
 
-  @JsonIgnore
+//  @JsonIgnore
   private String password;
 
   private String email;
@@ -22,7 +24,8 @@ public abstract class User {
     this.id = UUID.randomUUID();
     this.firstname = firstname;
     this.lastname = lastname;
-    this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+    final var hashedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + password;
+    this.password = Hashing.sha256().hashString(hashedPassword, StandardCharsets.UTF_8).toString();
     this.email = email;
     this.address = address;
     this.phoneNumber = phoneNumber;
