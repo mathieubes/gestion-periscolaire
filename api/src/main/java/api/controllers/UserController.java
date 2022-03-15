@@ -28,7 +28,7 @@ public class UserController {
   @GetMapping
   public String getUsers() throws IOException {
     List<User> users = fakeDatabaseService.getUsers();
-    return jsonParserService.parseToJson("usersList", users);
+    return jsonParserService.parseToJson("users", users);
 
   }
 
