@@ -8,43 +8,23 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import api.models.Parent;
-import api.models.User;
 
 @Service
 @Scope("singleton")
 public class FakeDatabaseService {
-  private ArrayList<User> users = new ArrayList<User>();
   private ArrayList<Parent> parents = new ArrayList<Parent>();
-
-  private User mathieu;
-  private User garik;
-  private User florian;
-  private User fawaz;
-
-  private Parent parentMathieu;
-
-  @PostConstruct
-  public void initFakeUsers() {
-    mathieu = new User("Mathieu", "BES", "pwdTest1", "matDu91@gmail.fr", "surLaA6", "06qlqchose");
-    garik = new User("Garik", "DERMINJYAN", "pwdTest2", "gd@gmail.fr", "surLePeriph", "07qlqchose");
-    florian = new User("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218");
-    fawaz = new User("Fawaz", "MOUSSOUGAN", "pwdTest4", "whiteHatsMaster@gmail.fr", "unknown", "Call the police");
-
-    users.add(mathieu);
-    users.add(garik);
-    users.add(florian);
-    users.add(fawaz);
-  }
 
   @PostConstruct
   public void initFakeParents() {
-    parentMathieu = new Parent(mathieu, 10000);
+    Parent mathieu = new Parent("Mathieu", "BES", "pwdTest1", "matDu91@gmail.fr", "surLaA6", "06qlqchose", 10000);
+    Parent garik = new Parent("Garik", "DERMINJYAN", "pwdTest2", "gd@gmail.fr", "surLePeriph", "07qlqchose", 209);
+    Parent florian = new Parent("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218", 22);
+    Parent fawaz = new Parent("Fawaz", "MOUSSOUGAN", "pwdTest4", "criminal@gmail.fr", "unknown", "Call the police", 0);
 
-    parents.add(parentMathieu);
-  }
-
-  public ArrayList<User> getUsers() {
-    return users;
+    parents.add(mathieu);
+    parents.add(garik);
+    parents.add(florian);
+    parents.add(fawaz);
   }
 
   public ArrayList<Parent> getParents() {

@@ -1,26 +1,25 @@
 package api.controllers;
 
-import api.models.EnvKey;
-import api.services.EnvService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import api.services.JsonParserService;
+import api.services.JsonService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/")
 public class CheckHealthController {
   @Autowired
-  JsonParserService jsonParserService;
+  JsonService jsonService;
 
-  @RequestMapping(value = "", method = RequestMethod.GET)
+  @RequestMapping(value = "/", method = RequestMethod.GET)
   public String checkHealth() throws JsonProcessingException {
-    return jsonParserService.parseToJson("status", "Ok");
+    return jsonService.parseToJson("status", "Ok");
   }
 
 }

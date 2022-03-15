@@ -8,7 +8,7 @@ import api.services.EnvService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.hash.Hashing;
 
-public class User {
+public abstract class User {
   private UUID id;
   private String firstname;
   private String lastname;
