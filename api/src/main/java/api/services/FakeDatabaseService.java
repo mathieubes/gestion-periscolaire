@@ -17,13 +17,15 @@ public class FakeDatabaseService {
 
   @PostConstruct
   public void initializeFakeUsers() {
-    var mathieu = new User("Mathieu", "BES", "pwdTest");
-    var garik = new User("Garik", "DERMINJYAN", "flk");
-    var florian = new User("Florian", "CARBONI", "dksjskj");
+    var mathieu = new User("Mathieu", "BES", "pwdTest1", "matmat@gmail.fr", "surLaA6", "06qlqchose");
+    var garik = new User("Garik", "DERMINJYAN", "pwdTest2", "gd@gmail.fr", "surLePeriph", "07qlqchose");
+    var florian = new User("Florian", "CARBONI", "pwdTest3", "bgDeL_IBGBI@gmail.fr", "versRis", "118 218");
+    var fawaz = new User("Fawaz", "Moussougan", "pwdTest4", "whiteHatsMaster@gmail.fr", "unknown", "Call the police");
 
     users.add(mathieu);
     users.add(garik);
     users.add(florian);
+    users.add(fawaz);
   }
 
   public ArrayList<User> getUsers() {

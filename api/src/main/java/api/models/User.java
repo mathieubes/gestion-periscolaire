@@ -14,11 +14,18 @@ public class User {
   @JsonIgnore
   private String password;
 
-  public User(String firstname, String lastname, String passWord) {
+  private String email;
+  private String address;
+  private String phoneNumber;
+
+  public User(String firstname, String lastname, String password, String email, String address, String phoneNumber) {
     this.id = UUID.randomUUID();
     this.firstname = firstname;
     this.lastname = lastname;
-    this.password = Hashing.sha256().hashString(passWord, StandardCharsets.UTF_8).toString();
+    this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+    this.email = email;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
   }
 
   public UUID getId() {
@@ -31,5 +38,17 @@ public class User {
 
   public String getLastname() {
     return lastname;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
   }
 }
