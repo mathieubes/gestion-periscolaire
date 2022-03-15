@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Scope("singleton")
-public class JsonParserService {
+public class JsonService {
   ObjectMapper objectMapper;
 
   @PostConstruct
-  public void initializeObjectMapper() {
+  public void initObjectMapper() {
     this.objectMapper = new ObjectMapper();
   }
 
