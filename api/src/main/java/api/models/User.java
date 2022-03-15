@@ -4,8 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import api.services.EnvGlobalUseService;
-import api.services.EnvService;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.google.common.hash.Hashing;
 
 public abstract class User {
@@ -13,7 +12,7 @@ public abstract class User {
   private String firstname;
   private String lastname;
 
-//  @JsonIgnore
+  // @JsonIgnore
   private String password;
 
   private String email;
