@@ -15,6 +15,7 @@ import api.models.User;
 import api.services.FakeDatabaseService;
 import api.services.JsonParserService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -24,8 +25,7 @@ public class UserController {
   @Autowired
   FakeDatabaseService fakeDatabaseService;
 
-  @CrossOrigin(origins = "http://localhost:3000")
-  @RequestMapping(value = "", method = RequestMethod.GET)
+  @RequestMapping(value = "/", method = RequestMethod.GET)
   public String getUsers() throws JsonProcessingException {
     ArrayList<User> users = fakeDatabaseService.getUsers();
     return jsonParserService.parseToJson("users", users);
