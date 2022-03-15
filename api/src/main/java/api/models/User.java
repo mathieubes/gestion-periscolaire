@@ -40,6 +40,10 @@ public class User {
     return lastname;
   }
 
+  public String getPassword() {
+    return password;
+  }
+
   public String getEmail() {
     return email;
   }
@@ -51,4 +55,5 @@ public class User {
   public String getPhoneNumber() {
     return phoneNumber;
   }
+
 }
