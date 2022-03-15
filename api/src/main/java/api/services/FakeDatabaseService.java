@@ -1,7 +1,6 @@
 package api.services;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -14,7 +13,7 @@ import api.models.User;
 @Scope("singleton")
 public class FakeDatabaseService {
 
-  private List<User> users = new ArrayList<User>();
+  private ArrayList<User> users = new ArrayList<User>();
 
   @PostConstruct
   public void initializeFakeUsers() {
@@ -27,7 +26,7 @@ public class FakeDatabaseService {
     users.add(florian);
   }
 
-  public List<User> getUsers() {
+  public ArrayList<User> getUsers() {
     return users;
   }
 
