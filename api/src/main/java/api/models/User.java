@@ -24,7 +24,8 @@ public class User {
     this.id = UUID.randomUUID();
     this.firstname = firstname;
     this.lastname = lastname;
-    this.password = Hashing.sha256().hashString(EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + password, StandardCharsets.UTF_8).toString();
+    final var hashedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + password;
+    this.password = Hashing.sha256().hashString(hashedPassword, StandardCharsets.UTF_8).toString();
     this.email = email;
     this.address = address;
     this.phoneNumber = phoneNumber;
