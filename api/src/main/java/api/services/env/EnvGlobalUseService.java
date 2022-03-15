@@ -1,8 +1,8 @@
-package api.services;
-
-import api.models.EnvKey;
+package api.services.env;
 
 import java.util.Map;
+
+import api.models.env.EnvKey;
 
 public class EnvGlobalUseService {
     private static Map<EnvKey, String> env;

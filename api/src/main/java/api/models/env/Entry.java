@@ -1,4 +1,4 @@
-package api.models;
+package api.models.env;
 
 public class Entry<K, V> {
     private K key;

@@ -1,8 +1,8 @@
-package api.services;
+package api.services.env;
 
-import api.models.Entry;
-import api.models.EntryConverter;
-import api.models.EnvKey;
+import api.models.env.Entry;
+import api.models.env.EntryConverter;
+import api.models.env.EnvKey;
 
 import java.io.File;
 import java.io.FileNotFoundException;
