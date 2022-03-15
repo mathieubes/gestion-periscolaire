@@ -2,7 +2,7 @@ package api.services.env;
 
 import java.util.Map;
 
-import api.models.env.EnvKey;
+import api.models.enums.EnvKey;
 
 public class EnvGlobalUseService {
     private static Map<EnvKey, String> env;

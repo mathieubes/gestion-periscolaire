@@ -3,7 +3,7 @@ package api.models;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-import api.models.env.EnvKey;
+import api.models.enums.EnvKey;
 import api.services.env.EnvGlobalUseService;
 
 import com.google.common.hash.Hashing;
