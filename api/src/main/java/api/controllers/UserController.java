@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.models.Parent;
-import api.services.FakeDatabaseService;
+import api.services.UserService;
 import api.services.JsonService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -22,12 +22,12 @@ public class UserController {
   JsonService jsonService;
 
   @Autowired
-  FakeDatabaseService fakeDatabaseService;
+  UserService fakeDatabaseService;
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
   public String getParents() throws JsonProcessingException {
     ArrayList<Parent> parents = fakeDatabaseService.getParents();
-    return jsonService.parseToJson("parents", parents);
+    return jsonService.stringify("parents", parents);
   }
 
 }
