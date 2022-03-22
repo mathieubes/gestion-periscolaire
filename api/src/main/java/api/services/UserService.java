@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.annotation.PostConstruct;
 
 import api.models.http.ParentPostDTO;
-import api.models.http.UserPostDTO;
 import com.google.common.hash.Hashing;
 
 import org.springframework.context.annotation.Scope;

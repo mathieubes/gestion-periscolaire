@@ -45,7 +45,7 @@ public class EnvService implements EntryConverter {
     @Override
     public Entry<String, String> getEntryFromString(String str, String delimiter) {
         final var keyValue = str.split(delimiter);
-        return new Entry(EnvKey.valueOf(keyValue[0]), keyValue[1]);
+        return new Entry<>(keyValue[0], keyValue[1]);
     }
 
     public Map<EnvKey, String> getEnv() {
