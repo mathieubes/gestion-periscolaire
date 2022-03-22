@@ -22,11 +22,11 @@ public class UserController {
   JsonService jsonService;
 
   @Autowired
-  UserService fakeDatabaseService;
+  UserService userService;
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
   public String getParents() throws JsonProcessingException {
-    ArrayList<Parent> parents = fakeDatabaseService.getParents();
+    ArrayList<Parent> parents = userService.getParents();
     return jsonService.stringify("parents", parents);
   }
 
