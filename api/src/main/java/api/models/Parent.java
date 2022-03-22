@@ -1,21 +1,26 @@
 package api.models;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class Parent extends User {
   private float fiscalNumber;
+  private ArrayList<Child> children;
 
-  public Parent(String firstname, String lastname, String password, String email, String address, String phoneNumber,
+  public Parent(UUID id, String firstname, String lastname, String password, String email, String address,
+      String phoneNumber,
       float fiscalNumber) {
-    super(firstname, lastname, password, email, address, phoneNumber);
-    this.fiscalNumber = fiscalNumber;
-  }
+    super(id, firstname, lastname, password, email, address, phoneNumber);
 
-  public Parent(User user, float fiscalNumber) {
-    super(user.getFirstname(), user.getLastname(), user.getPassword(), user.getEmail(), user.getAddress(),
-        user.getPhoneNumber());
     this.fiscalNumber = fiscalNumber;
+    this.children = new ArrayList<Child>();
   }
 
   public float getFiscalNumber() {
     return fiscalNumber;
+  }
+
+  public ArrayList<Child> getChilden() {
+    return children;
   }
 }

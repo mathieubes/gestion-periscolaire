@@ -1,28 +1,25 @@
 package api.models;
 
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.hash.Hashing;
-
-public class User {
+public abstract class User {
   private UUID id;
   private String firstname;
   private String lastname;
 
-  @JsonIgnore
+  // @JsonIgnore
   private String password;
 
   private String email;
   private String address;
   private String phoneNumber;
 
-  public User(String firstname, String lastname, String password, String email, String address, String phoneNumber) {
-    this.id = UUID.randomUUID();
+  public User(UUID id, String firstname, String lastname, String password, String email, String address,
+      String phoneNumber) {
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
-    this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+    this.password = password;
     this.email = email;
     this.address = address;
     this.phoneNumber = phoneNumber;
