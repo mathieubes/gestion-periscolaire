@@ -3,7 +3,7 @@ package api.models;
 import java.util.Date;
 import java.util.UUID;
 
-public abstract class Activity {
+public class Activity {
   private UUID id;
   private String name;
   private Date date;
