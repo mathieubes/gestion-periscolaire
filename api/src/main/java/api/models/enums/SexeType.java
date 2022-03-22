@@ -1,6 +1,7 @@
 package api.models.enums;
 
 public enum SexeType {
-  male,
-  female,
+  MALE,
+  FEMALE,
+  OTHER
 }
