@@ -1,5 +1,5 @@
 package api.models.env;
 
 public interface EntryConverter {
-    Entry getEntryFromString(String str, String delimiter);
+    Entry<String, String> getEntryFromString(String str, String delimiter);
 }

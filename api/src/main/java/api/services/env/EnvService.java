@@ -17,7 +17,7 @@ public class EnvService implements EntryConverter {
         try {
             final var reader = getFileReader(path);
             final var entries = readLinesAndGetEntries(reader);
-            entries.forEach(entry -> this.env.put((EnvKey) entry.getKey(), (String) entry.getValue()));
+            entries.forEach(entry -> this.env.put(EnvKey.valueOf(entry.getKey()), entry.getValue()));
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
@@ -33,8 +33,8 @@ public class EnvService implements EntryConverter {
         }
     }
 
-    private List<Entry> readLinesAndGetEntries(Scanner reader) {
-        final List<Entry> entries = new ArrayList<>();
+    private List<Entry<String, String>> readLinesAndGetEntries(Scanner reader) {
+        final List<Entry<String, String>> entries = new ArrayList<>();
         while (reader.hasNextLine()) {
             final var entry = this.getEntryFromString(reader.nextLine(), "=");
             entries.add(entry);
@@ -43,7 +43,7 @@ public class EnvService implements EntryConverter {
     }
 
     @Override
-    public Entry getEntryFromString(String str, String delimiter) {
+    public Entry<String, String> getEntryFromString(String str, String delimiter) {
         final var keyValue = str.split(delimiter);
         return new Entry(EnvKey.valueOf(keyValue[0]), keyValue[1]);
     }
