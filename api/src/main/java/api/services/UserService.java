@@ -52,5 +52,14 @@ public class UserService {
     UUID id = UUID.fromString(_id);
     this.parents.removeIf(parent -> (parent.getId().equals(id)));
   }
+  
+  public float computeFiscalCoef(Parent parent, float income) {
+    final var dependentChildrenCount = parent.getChilden().size();
+    // Considerer le fait qu'il y a 2 parents
+    var familyQuotient = income / dependentChildrenCount;
+    familyQuotient -= 10085;
+
+    return 0;
+  }
 
 }
