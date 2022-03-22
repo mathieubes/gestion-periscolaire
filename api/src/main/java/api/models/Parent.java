@@ -20,7 +20,7 @@ public class Parent extends User {
     return fiscalNumber;
   }
 
-  public ArrayList<Child> getChilden() {
+  public ArrayList<Child> getChildren() {
     return children;
   }
 }

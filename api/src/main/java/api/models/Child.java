@@ -3,6 +3,8 @@ package api.models;
 import java.util.ArrayList;
 import java.util.Date;
 
+import api.models.activities.Activity;
+import api.models.activities.restaurant.Allergen;
 import api.models.enums.SexeType;
 
 public class Child {
