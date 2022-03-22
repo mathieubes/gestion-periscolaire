@@ -11,6 +11,7 @@ public class Child {
   private Date birthDate;
   private SexeType sexe;
   private ArrayList<Activity> activities;
+  private ArrayList<Allergen> allergens;
 
   public Child(String firstname, String lastname, Date birthDate, SexeType sexe) {
     this.firstname = firstname;
@@ -18,6 +19,7 @@ public class Child {
     this.birthDate = birthDate;
     this.sexe = sexe;
     this.activities = new ArrayList<Activity>();
+    this.allergens = new ArrayList<Allergen>();
   }
 
   public String getFirstname() {
@@ -38,6 +40,10 @@ public class Child {
 
   public ArrayList<Activity> getActivities() {
     return this.activities;
+  }
+
+  public ArrayList<Allergen> getAllergens() {
+    return this.allergens;
   }
 
 }
