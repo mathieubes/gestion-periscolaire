@@ -1,12 +1,34 @@
 package api.models.http;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class UserPostDTO {
 
+    @NotNull
+    @NotBlank
     private String firstname;
+
+    @NotNull
+    @NotBlank
     private String lastname;
+
+    @NotNull
+    @NotBlank
     private String password;
+
+    @Email
+    @NotNull
+    @NotBlank
     private String email;
+
+    @NotNull
+    @NotBlank
     private String address;
+
+    @NotNull
+    @NotBlank
     private String phoneNumber;
 
     public UserPostDTO(String firstname, String lastname, String password, String email, String address,

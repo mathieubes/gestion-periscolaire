@@ -2,6 +2,8 @@ package api.controllers;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import api.models.http.UserPostDTO;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,7 +26,8 @@ public class UserController {
   UserService userService;
 
   @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
-  public Parent addParent(@RequestBody UserPostDTO userPostDTO) {
+  public Parent addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
+
     return userService.addParent(userPostDTO);
   }
 
