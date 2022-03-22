@@ -2,13 +2,11 @@ package api.controllers;
 
 import java.util.ArrayList;
 
+import api.models.http.ParentPostDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import api.models.Parent;
 import api.services.UserService;
@@ -23,6 +21,11 @@ public class UserController {
 
   @Autowired
   UserService userService;
+
+  @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
+  public Parent addParent(@RequestBody ParentPostDTO parentDto) {
+    return userService.addParent(parentDto);
+  }
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
   public String getParents() throws JsonProcessingException {
