@@ -2,7 +2,8 @@ package api.controllers;
 
 import java.util.ArrayList;
 
-import api.models.http.ParentPostDTO;
+import api.models.http.UserPostDTO;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class UserController {
   UserService userService;
 
   @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
-  public Parent addParent(@RequestBody ParentPostDTO parentDto) {
-    return userService.addParent(parentDto);
+  public Parent addParent(@RequestBody UserPostDTO userPostDTO) {
+    return userService.addParent(userPostDTO);
   }
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)

@@ -1,6 +1,6 @@
 package api.models.http;
 
-public abstract class UserPostDTO {
+public class UserPostDTO {
 
     private String firstname;
     private String lastname;
@@ -9,7 +9,8 @@ public abstract class UserPostDTO {
     private String address;
     private String phoneNumber;
 
-    public UserPostDTO(String firstname, String lastname, String password, String email, String address, String phoneNumber) {
+    public UserPostDTO(String firstname, String lastname, String password, String email, String address,
+            String phoneNumber) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;

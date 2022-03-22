@@ -8,11 +8,10 @@ public class Parent extends User {
   private ArrayList<Child> children;
 
   public Parent(UUID id, String firstname, String lastname, String password, String email, String address,
-      String phoneNumber,
-      float fiscalNumber) {
+      String phoneNumber) {
     super(id, firstname, lastname, password, email, address, phoneNumber);
 
-    this.fiscalNumber = fiscalNumber;
+    this.fiscalNumber = 0;
     this.children = new ArrayList<Child>();
   }
 
