@@ -19,7 +19,7 @@ public class CheckHealthController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String checkHealth() throws JsonProcessingException {
-    return jsonService.parseToJson("status", "Ok");
+    return jsonService.stringify("status", "Ok");
   }
 
 }

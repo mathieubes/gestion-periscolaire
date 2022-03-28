@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("singleton")
 public class JsonService {
-  ObjectMapper objectMapper;
+  private ObjectMapper objectMapper;
 
   @PostConstruct
-  public void initObjectMapper() {
+  private void initObjectMapper() {
     this.objectMapper = new ObjectMapper();
   }
 
-  public String parseToJson(String key, Object message) throws JsonProcessingException {
+  public String stringify(String key, Object message) throws JsonProcessingException {
     return ("{" + this.objectMapper.writeValueAsString(key) + " : " + this.objectMapper.writeValueAsString(message)
         + "}");
   }

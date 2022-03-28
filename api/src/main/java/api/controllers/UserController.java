@@ -2,16 +2,17 @@ package api.controllers;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
+import api.models.http.UserPostDTO;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import api.models.Parent;
-import api.services.FakeDatabaseService;
+import api.services.UserService;
 import api.services.JsonService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -22,12 +23,18 @@ public class UserController {
   JsonService jsonService;
 
   @Autowired
-  FakeDatabaseService fakeDatabaseService;
+  UserService userService;
+
+  @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
+  public Parent addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
+
+    return userService.addParent(userPostDTO);
+  }
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
   public String getParents() throws JsonProcessingException {
-    ArrayList<Parent> parents = fakeDatabaseService.getParents();
-    return jsonService.parseToJson("parents", parents);
+    ArrayList<Parent> parents = userService.getParents();
+    return jsonService.stringify("parents", parents);
   }
 
 }
