@@ -7,18 +7,18 @@ import api.models.activities.Activity;
 import api.models.enums.Difficulty;
 
 public class Sport extends Activity {
-  private Number requiredAge;
+  private int requiredAge;
   private Difficulty difficulty;
 
-  public Sport(UUID id, String name, Date date, Number duration, Number capacity, Number minSupervisors,
-      Number price, Number requiredAge, Difficulty difficulty) {
+  public Sport(UUID id, String name, Date date, int duration, int capacity, int minSupervisors,
+      double price, int requiredAge, Difficulty difficulty) {
     super(id, name, date, duration, capacity, minSupervisors, price);
 
     this.requiredAge = requiredAge;
     this.difficulty = difficulty;
   }
 
-  public Number getRequiredAge() {
+  public int getRequiredAge() {
     return this.requiredAge;
   }
 

@@ -7,13 +7,13 @@ public class Activity {
   private UUID id;
   private String name;
   private Date date;
-  private Number duration;
-  private Number capacity;
-  private Number minSupervisors;
-  private Number price;
+  private int duration;
+  private int capacity;
+  private int minSupervisors;
+  private double price;
 
-  public Activity(UUID id, String name, Date date, Number duration, Number capacity, Number minSupervisors,
-      Number price) {
+  public Activity(UUID id, String name, Date date, int duration, int capacity, int minSupervisors,
+      double price) {
     this.id = id;
     this.name = name;
     this.date = date;
@@ -35,19 +35,19 @@ public class Activity {
     return this.date;
   }
 
-  public Number getDuration() {
+  public int getDuration() {
     return this.duration;
   }
 
-  public Number getCapacity() {
+  public int getCapacity() {
     return this.capacity;
   }
 
-  public Number getMinSupervisors() {
+  public int getMinSupervisors() {
     return this.minSupervisors;
   }
 
-  public Number getPrice() {
+  public double getPrice() {
     return this.price;
   }
 
