@@ -5,21 +5,21 @@ import java.util.Date;
 
 import api.models.activities.Activity;
 import api.models.activities.restaurant.Allergen;
-import api.models.enums.SexeType;
+import api.models.enums.Gender;
 
 public class Child {
   private String firstname;
   private String lastname;
   private Date birthDate;
-  private SexeType sexe;
+  private Gender gender;
   private ArrayList<Activity> activities;
   private ArrayList<Allergen> allergens;
 
-  public Child(String firstname, String lastname, Date birthDate, SexeType sexe) {
+  public Child(String firstname, String lastname, Date birthDate, Gender gender) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.birthDate = birthDate;
-    this.sexe = sexe;
+    this.gender = gender;
     this.activities = new ArrayList<Activity>();
     this.allergens = new ArrayList<Allergen>();
   }
@@ -36,8 +36,8 @@ public class Child {
     return birthDate;
   }
 
-  public SexeType getSexe() {
-    return sexe;
+  public Gender getSexe() {
+    return gender;
   }
 
   public ArrayList<Activity> getActivities() {
