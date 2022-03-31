@@ -10,6 +10,7 @@ import api.models.http.UserPostDTO;
 
 import com.google.common.hash.Hashing;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ import api.services.env.EnvGlobalUseService;
 @Service
 @Scope("singleton")
 public class UserService {
+  @Autowired
+  JsonService jsonService;
+
   private ArrayList<Parent> parents = new ArrayList<Parent>();
 
   @PostConstruct
@@ -46,4 +50,9 @@ public class UserService {
     return parent;
   }
 
+  // public void deleteParent(UserDeleteDTO userDeleteDTO) throws
+  // JsonProcessingException {
+  // System.out.print(this.jsonService.stringify("id", userDeleteDTO));
+  // }
+ 
 }

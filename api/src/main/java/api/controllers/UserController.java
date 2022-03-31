@@ -25,16 +25,20 @@ public class UserController {
   @Autowired
   UserService userService;
 
-  @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
-  public Parent addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
-
-    return userService.addParent(userPostDTO);
-  }
-
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
   public String getParents() throws JsonProcessingException {
     ArrayList<Parent> parents = userService.getParents();
     return jsonService.stringify("parents", parents);
+  }
+
+  @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
+  public Parent addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
+    return userService.addParent(userPostDTO);
+  }
+
+  @RequestMapping(value = "/parents/delete", method = RequestMethod.DELETE)
+  public String deleteParent(@RequestBody String id) {
+    return id;
   }
 
 }
