@@ -36,9 +36,9 @@ public class UserController {
     return userService.addParent(userPostDTO);
   }
 
-  @RequestMapping(value = "/parents/delete", method = RequestMethod.DELETE)
-  public String deleteParent(@RequestBody String id) {
-    return id;
+  @RequestMapping(value = "/parents/delete/{id}", method = RequestMethod.DELETE)
+  public void deleteParent(@PathVariable String id) {
+    userService.deleteParent(id);
   }
 
 }

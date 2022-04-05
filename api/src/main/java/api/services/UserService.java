@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
-
-import api.models.http.UserPostDTO;
-
 import com.google.common.hash.Hashing;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import api.models.Parent;
 import api.models.enums.EnvKey;
+import api.models.http.UserPostDTO;
 import api.services.env.EnvGlobalUseService;
 
 @Service
@@ -50,9 +48,9 @@ public class UserService {
     return parent;
   }
 
-  // public void deleteParent(UserDeleteDTO userDeleteDTO) throws
-  // JsonProcessingException {
-  // System.out.print(this.jsonService.stringify("id", userDeleteDTO));
-  // }
- 
+  public void deleteParent(String _id) {
+    UUID id = UUID.fromString(_id);
+    this.parents.removeIf(parent -> (parent.getId().equals(id)));
+  }
+
 }
