@@ -62,7 +62,8 @@ public class UserController {
   @RequestMapping(value = "/parents/signin", method = RequestMethod.POST)
   public ResponseEntity<Boolean> signin(@RequestBody SigninPostDTO signinPostDTO) {
     try {
-      return ResponseEntity.ok(true);
+      Boolean toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
+      return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
       return ResponseEntity.ok(false);
     }

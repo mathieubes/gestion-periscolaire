@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import api.models.Parent;
 import api.models.enums.EnvKey;
+import api.models.http.SigninPostDTO;
 import api.models.http.UserPostDTO;
 import api.services.env.EnvGlobalUseService;
 
@@ -51,6 +52,18 @@ public class UserService {
   public void deleteParent(String _id) {
     UUID id = UUID.fromString(_id);
     this.parents.removeIf(parent -> (parent.getId().equals(id)));
+  }
+
+  public boolean areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {
+    return this.parents.stream().filter(parent -> {
+      boolean isEmailEqual = parent.getEmail().equals(signinPostDTO.getEmail());
+
+      String saltedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + signinPostDTO.getPassword();
+      String hashedPassword = Hashing.sha256().hashString(saltedPassword, StandardCharsets.UTF_8).toString();
+      boolean isPasswordEqual = parent.getPassword().equals(hashedPassword);
+
+      return (isEmailEqual && isPasswordEqual);
+    }).findFirst().isPresent();
   }
 
 }
