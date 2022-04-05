@@ -3,11 +3,9 @@ package api.services;
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.function.Predicate;
 
 import javax.annotation.PostConstruct;
 
-import api.models.ActivityType;
 import api.models.Child;
 import api.models.enums.Gender;
 import api.models.http.UserPostDTO;
