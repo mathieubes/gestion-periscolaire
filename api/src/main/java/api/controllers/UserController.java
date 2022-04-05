@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import javax.validation.Valid;
 
+import api.models.http.SigninPostDTO;
 import api.models.http.UserPostDTO;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import api.models.Parent;
@@ -26,19 +28,44 @@ public class UserController {
   UserService userService;
 
   @RequestMapping(value = "/parents", method = RequestMethod.GET)
-  public String getParents() throws JsonProcessingException {
-    ArrayList<Parent> parents = userService.getParents();
-    return jsonService.stringify("parents", parents);
+  public ResponseEntity<String> getParents() throws JsonProcessingException {
+    try {
+      ArrayList<Parent> parents = userService.getParents();
+      String toReturn = jsonService.stringify("parents", parents);
+      return ResponseEntity.ok(toReturn);
+
+    } catch (Exception e) {
+      throw e;
+    }
   }
 
   @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
-  public Parent addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
-    return userService.addParent(userPostDTO);
+  public ResponseEntity<Parent> addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
+    try {
+      Parent toReturn = userService.addParent(userPostDTO);
+      return ResponseEntity.ok(toReturn);
+    } catch (Exception e) {
+      throw e;
+    }
   }
 
   @RequestMapping(value = "/parents/delete/{id}", method = RequestMethod.DELETE)
-  public void deleteParent(@PathVariable String id) {
-    userService.deleteParent(id);
+  public ResponseEntity<Void> deleteParent(@PathVariable String id) {
+    try {
+      userService.deleteParent(id);
+      return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+
+  @RequestMapping(value = "/parents/signin", method = RequestMethod.POST)
+  public ResponseEntity<Boolean> signin(@RequestBody SigninPostDTO signinPostDTO) {
+    try {
+      return ResponseEntity.ok(true);
+    } catch (Exception e) {
+      return ResponseEntity.ok(false);
+    }
   }
 
 }
