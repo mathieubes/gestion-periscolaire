@@ -2,12 +2,14 @@ package api.models;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class User {
   private UUID id;
   private String firstname;
   private String lastname;
 
-  // @JsonIgnore
+  @JsonIgnore
   private String password;
 
   private String email;
