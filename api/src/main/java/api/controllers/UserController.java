@@ -70,9 +70,11 @@ public class UserController {
   }
 
   @RequestMapping(value = "/parents/fiscal/{id}", method = RequestMethod.GET)
-  public String getParentFiscalCoef(@PathVariable("id") String parentID, @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
+  public String getParentFiscalCoef(@PathVariable("id") String parentID,
+      @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
     final var parent = this.userService.getParentByID(parentID);
     final var fiscalCoef = this.userService.computeFiscalCoef(parent, annualIncome);
+
     return jsonService.stringify("fiscalCoef", fiscalCoef);
   }
 

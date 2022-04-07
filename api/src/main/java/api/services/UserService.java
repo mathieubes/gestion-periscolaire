@@ -33,8 +33,10 @@ public class UserService {
   private void initFakeParents() {
     addParent(new UserPostDTO("Mathieu", "BES", "pwdTest1", "matDu91@gmail.fr", "surLaA6", "06qlqchose"));
     addParent(new UserPostDTO("Garik", "DERMINJYAN", "pwdTest2", "gd@gmail.fr", "surLePeriph", "07qlqchose"));
+
     final var florian = addParent(
         new UserPostDTO("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218"));
+
     florian.addDependentChild(new Child("Garrickc", "Italien", new Date(), Gender.FEMALE));
     florian.addDependentChild(new Child("Garricka", "Italienne", new Date(), Gender.MALE));
     addParent(new UserPostDTO("Fawaz", "MOUSSOUGAN", "pwdTest4", "criminal@gmail.fr", "unknown", "Call the police"));
