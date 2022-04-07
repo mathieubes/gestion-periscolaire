@@ -70,8 +70,7 @@ public class UserService {
   // Formula used by the Evry City Council
   public double computeFiscalCoef(Parent parent, double annualIncome) {
     if (parent != null) {
-      final var dependChildrenCount = parent.getDependentChildrenCount();
-      System.out.println(dependChildrenCount);
+      final var dependChildrenCount = parent.calculateDependentChildrenCount();
 
       double coef = 0;
       double calcul = (Math.max(annualIncome / 0.9 / 12,

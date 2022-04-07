@@ -27,7 +27,7 @@ public class Parent extends User {
     this.children.add(child);
   }
 
-  public int getDependentChildrenCount() {
+  public int calculateDependentChildrenCount() {
     return (int) this.children.stream().filter(child -> {
       return child.isDependent();
     }).count();
