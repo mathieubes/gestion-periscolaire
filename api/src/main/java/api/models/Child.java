@@ -12,14 +12,16 @@ public class Child {
   private String lastname;
   private Date birthDate;
   private Gender gender;
+  private boolean dependent;
   private ArrayList<Activity> activities;
   private ArrayList<Allergen> allergens;
 
-  public Child(String firstname, String lastname, Date birthDate, Gender gender) {
+  public Child(String firstname, String lastname, Date birthDate, Gender gender, boolean dependent) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.birthDate = birthDate;
     this.gender = gender;
+    this.dependent = dependent;
     this.activities = new ArrayList<Activity>();
     this.allergens = new ArrayList<Allergen>();
   }
@@ -38,6 +40,10 @@ public class Child {
 
   public Gender getSexe() {
     return gender;
+  }
+
+  public boolean isDependent() {
+    return dependent;
   }
 
   public ArrayList<Activity> getActivities() {

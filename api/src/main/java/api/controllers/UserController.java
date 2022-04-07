@@ -33,7 +33,6 @@ public class UserController {
       ArrayList<Parent> parents = userService.getParents();
       String toReturn = jsonService.stringify("parents", parents);
       return ResponseEntity.ok(toReturn);
-
     } catch (Exception e) {
       throw e;
     }
@@ -65,7 +64,21 @@ public class UserController {
       Boolean toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
       return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
-      return ResponseEntity.ok(false);
+      throw e;
+    }
+  }
+
+  @RequestMapping(value = "/parents/fiscal/{id}", method = RequestMethod.GET)
+  public ResponseEntity<String> getParentFiscalCoef(@PathVariable("id") String parentID,
+      @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
+    try {
+      final var parent = this.userService.getParentByID(parentID);
+      final var fiscalCoef = this.userService.computeFiscalCoef(parent, annualIncome);
+
+      String toReturn = jsonService.stringify("fiscalCoef", fiscalCoef);
+      return ResponseEntity.ok(toReturn);
+    } catch (Exception e) {
+      throw e;
     }
   }
 
