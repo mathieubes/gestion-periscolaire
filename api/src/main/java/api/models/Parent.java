@@ -27,10 +27,10 @@ public class Parent extends User {
     this.children.add(child);
   }
 
-  // TODO Calculate
   public int getDependentChildrenCount() {
-    var size = this.children.size();
-    return size;
+    return (int) this.children.stream().filter(child -> {
+      return child.isDependent();
+    }).count();
   }
 
 }

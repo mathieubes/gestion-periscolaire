@@ -27,7 +27,7 @@ public class UserService {
   @Autowired
   JsonService jsonService;
 
-  private ArrayList<Parent> parents = new ArrayList<Parent>();
+  private ArrayList<Parent> parents = new ArrayList<>();
 
   @PostConstruct
   private void initFakeParents() {
@@ -37,8 +37,8 @@ public class UserService {
 
     final var florian = addParent(
         new UserPostDTO("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218"));
-    florian.addChild(new Child("Pedro", "Italian", new Date(), Gender.MALE));
-    florian.addChild(new Child("Sara", "Mexican", new Date(), Gender.FEMALE));
+    florian.addChild(new Child("Pedro", "Italian", new Date(), Gender.MALE, true));
+    florian.addChild(new Child("Sara", "Mexican", new Date(), Gender.FEMALE, false));
   }
 
   public ArrayList<Parent> getParents() {
