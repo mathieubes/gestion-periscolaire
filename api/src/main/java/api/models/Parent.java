@@ -1,7 +1,6 @@
 package api.models;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class Parent extends User {
@@ -14,8 +13,8 @@ public class Parent extends User {
     super(id, firstname, lastname, password, email, address, phoneNumber);
 
     this.fiscalNumber = 0;
-    this.children = new ArrayList();
-    this.dependentChildren = new ArrayList();
+    this.children = new ArrayList<>();
+    this.dependentChildren = new ArrayList<>();
   }
 
   public float getFiscalNumber() {
@@ -30,5 +29,7 @@ public class Parent extends User {
     this.dependentChildren.add(child);
   }
 
-  public int getDependentChildrenCount() { return dependentChildren.size(); }
+  public int getDependentChildrenCount() {
+    return dependentChildren.size();
+  }
 }
