@@ -49,7 +49,7 @@ public class UserController {
     }
   }
 
-  @RequestMapping(value = "/parents/delete/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/parents/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Void> deleteParent(@PathVariable String id) {
     try {
       userService.deleteParent(id);
@@ -69,7 +69,7 @@ public class UserController {
     }
   }
 
-  @RequestMapping(value = "/parents/fiscal/{id}", method = RequestMethod.GET)
+  @RequestMapping(value = "/parents/{id}/fiscal", method = RequestMethod.GET)
   public ResponseEntity<String> getParentFiscalCoef(@PathVariable("id") String parentID,
       @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
     try {
