@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import api.models.Child;
 import api.models.Parent;
 import api.services.UserService;
 import api.services.JsonService;
@@ -44,6 +45,17 @@ public class UserController {
     try {
       Parent toReturn = userService.addParent(userPostDTO);
       return ResponseEntity.ok(toReturn);
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+
+  @RequestMapping(value = "/parents/{id}/children/add", method = RequestMethod.POST)
+  public ResponseEntity<String> addChild(@Valid @RequestBody Child child, @PathVariable String id)
+      throws JsonProcessingException {
+    try {
+      ArrayList<Child> toReturn = userService.addChild(child, id);
+      return ResponseEntity.ok(jsonService.stringify("children", toReturn));
     } catch (Exception e) {
       throw e;
     }

@@ -13,6 +13,7 @@ public class Child {
   private Date birthDate;
   private Gender gender;
   private boolean dependent;
+
   private ArrayList<Activity> activities;
   private ArrayList<Allergen> allergens;
 

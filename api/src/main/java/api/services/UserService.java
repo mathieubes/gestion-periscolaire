@@ -61,6 +61,12 @@ public class UserService {
     return parent;
   }
 
+  public ArrayList<Child> addChild(Child child, String id) {
+    Parent parent = this.getParentByID(id);
+    parent.addChild(child);
+    return parent.getChildren();
+  }
+
   public void deleteParent(String _id) {
     UUID id = UUID.fromString(_id);
     this.parents.removeIf(parent -> (parent.getId().equals(id)));
