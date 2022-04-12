@@ -1,7 +1,6 @@
 package api.services;
 
 import java.nio.charset.StandardCharsets;
-import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.annotation.PostConstruct;
@@ -65,33 +64,6 @@ public class UserService {
   public void deleteParent(String _id) {
     UUID id = UUID.fromString(_id);
     this.parents.removeIf(parent -> (parent.getId().equals(id)));
-  }
-
-  // Formula used by the Evry City Council
-  public double computeFiscalCoef(Parent parent, double annualIncome) {
-    if (parent != null) {
-      final var dependChildrenCount = parent.calculateDependentChildrenCount();
-
-      double coef = 0;
-      double calcul = (Math.max(annualIncome / 0.9 / 12,
-          551 * (1.5 + 0.3 * dependChildrenCount) + 0.61 * annualIncome / 0.9 / 12)
-          - (1.5 + 0.3 * dependChildrenCount) * 240) / (2 + (dependChildrenCount));
-
-      if (calcul >= 1300)
-        coef = 0.8f;
-      else if (calcul >= 418)
-        coef = 0.175 + 0.625 / 1300 * calcul;
-      else if (calcul >= 200)
-        coef = -0.022 + (0.197 / 418 + 0.625 / 1300) * calcul;
-      else
-        coef = 0.168;
-
-      coef *= 100;
-
-      DecimalFormat df = new DecimalFormat("00.00");
-      return Double.parseDouble(df.format(coef));
-    } else
-      return 0;
   }
 
   public Optional<Parent> areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {

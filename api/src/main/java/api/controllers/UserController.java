@@ -70,13 +70,12 @@ public class UserController {
   }
 
   @RequestMapping(value = "/parents/{id}/fiscal", method = RequestMethod.GET)
-  public ResponseEntity<String> getParentFiscalCoef(@PathVariable("id") String parentID,
+  public ResponseEntity<String> getParentCoef(@PathVariable("id") String parentID,
       @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
     try {
       final var parent = this.userService.getParentByID(parentID);
-      final var fiscalCoef = this.userService.computeFiscalCoef(parent, annualIncome);
 
-      String toReturn = jsonService.stringify("fiscalCoef", fiscalCoef);
+      String toReturn = jsonService.stringify("fiscalCoef", parent.getCoefNumber(annualIncome));
       return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
       throw e;
