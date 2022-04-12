@@ -41,10 +41,10 @@ public class UserController {
   }
 
   @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
-  public ResponseEntity<Parent> addParent(@Valid @RequestBody UserPostDTO userPostDTO) {
+  public ResponseEntity<String> addParent(@Valid @RequestBody UserPostDTO userPostDTO) throws JsonProcessingException {
     try {
       Parent toReturn = userService.addParent(userPostDTO);
-      return ResponseEntity.ok(toReturn);
+      return ResponseEntity.ok(jsonService.stringify("parent", toReturn));
     } catch (Exception e) {
       throw e;
     }
