@@ -72,10 +72,14 @@ public class UserController {
   }
 
   @RequestMapping(value = "/parents/signin", method = RequestMethod.POST)
-  public ResponseEntity<Optional<Parent>> signin(@RequestBody SigninPostDTO signinPostDTO) {
+  public ResponseEntity<String> signin(@RequestBody SigninPostDTO signinPostDTO) throws JsonProcessingException {
     try {
       Optional<Parent> toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
-      return ResponseEntity.ok(toReturn);
+      if (toReturn.isPresent()) {
+        return ResponseEntity.ok(jsonService.stringify("parent", toReturn.get()));
+      } else {
+        return ResponseEntity.badRequest().build();
+      }
     } catch (Exception e) {
       throw e;
     }
