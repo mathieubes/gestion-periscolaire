@@ -94,8 +94,8 @@ public class UserService {
       return 0;
   }
 
-  public boolean areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {
-    return this.parents.stream().filter(parent -> {
+  public Optional<Parent> areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {
+    Optional<Parent> parentFound = this.parents.stream().filter(parent -> {
       boolean isEmailEqual = parent.getEmail().equals(signinPostDTO.getEmail());
 
       String saltedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + signinPostDTO.getPassword();
@@ -103,7 +103,9 @@ public class UserService {
       boolean isPasswordEqual = parent.getPassword().equals(hashedPassword);
 
       return (isEmailEqual && isPasswordEqual);
-    }).findFirst().isPresent();
+    }).findFirst();
+
+    return parentFound;
   }
 
 }

@@ -1,6 +1,7 @@
 package api.controllers;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -59,9 +60,9 @@ public class UserController {
   }
 
   @RequestMapping(value = "/parents/signin", method = RequestMethod.POST)
-  public ResponseEntity<Boolean> signin(@RequestBody SigninPostDTO signinPostDTO) {
+  public ResponseEntity<Optional<Parent>> signin(@RequestBody SigninPostDTO signinPostDTO) {
     try {
-      Boolean toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
+      Optional<Parent> toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
       return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
       throw e;
