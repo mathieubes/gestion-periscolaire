@@ -2,10 +2,18 @@ package api.models.http;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import api.models.enums.Gender;
 
 public class ChildPostDTO {
+  @NotNull
+  @NotBlank
   private String firstname;
+
+  @NotNull
+  @NotBlank
   private String lastname;
   private Date birthDate;
   private Gender gender;
