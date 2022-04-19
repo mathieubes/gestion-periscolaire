@@ -71,6 +71,12 @@ public class UserService {
   // #region Update existing parent
   public Parent updateParent(UserPostDTO userPostDTO, String id) {
     Parent parent = getParentByID(id);
+
+    String saltedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + userPostDTO.getPassword();
+    String hashedPassword = Hashing.sha256().hashString(saltedPassword, StandardCharsets.UTF_8).toString();
+
+    userPostDTO.setPassword(hashedPassword);
+
     parent.setPersonalInfo(userPostDTO);
     return parent;
   }
