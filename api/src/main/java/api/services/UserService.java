@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import api.models.Parent;
 import api.models.enums.EnvKey;
+import api.models.http.ChildPostDTO;
 import api.models.http.SigninPostDTO;
 import api.services.env.EnvGlobalUseService;
 
@@ -36,8 +37,8 @@ public class UserService {
 
     final var florian = addParent(
         new UserPostDTO("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218"));
-    florian.addChild(new Child("Pedro", "Italian", new Date(), Gender.MALE, true));
-    florian.addChild(new Child("Sara", "Mexican", new Date(), Gender.FEMALE, false));
+    florian.addChild(new ChildPostDTO("Pedro", "Italian", new Date(), Gender.MALE, true));
+    florian.addChild(new ChildPostDTO("Sara", "Mexican", new Date(), Gender.FEMALE, false));
   }
 
   public ArrayList<Parent> getParents() {
@@ -61,9 +62,9 @@ public class UserService {
     return parent;
   }
 
-  public ArrayList<Child> addChild(Child child, String id) {
+  public ArrayList<Child> addChild(ChildPostDTO childPostDTO, String id) {
     Parent parent = this.getParentByID(id);
-    parent.addChild(child);
+    parent.addChild(childPostDTO);
     return parent.getChildren();
   }
 

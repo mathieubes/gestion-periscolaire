@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import api.models.http.ChildPostDTO;
 import api.models.http.SigninPostDTO;
 import api.models.http.UserPostDTO;
 
@@ -51,10 +52,10 @@ public class UserController {
   }
 
   @RequestMapping(value = "/parents/{id}/children/add", method = RequestMethod.POST)
-  public ResponseEntity<String> addChild(@Valid @RequestBody Child child, @PathVariable String id)
+  public ResponseEntity<String> addChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id)
       throws JsonProcessingException {
     try {
-      ArrayList<Child> toReturn = userService.addChild(child, id);
+      ArrayList<Child> toReturn = userService.addChild(childPostDTO, id);
       return ResponseEntity.ok(jsonService.stringify("children", toReturn));
     } catch (Exception e) {
       throw e;

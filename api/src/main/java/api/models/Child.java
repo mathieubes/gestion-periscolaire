@@ -2,12 +2,15 @@ package api.models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 import api.models.activities.Activity;
 import api.models.activities.restaurant.Allergen;
 import api.models.enums.Gender;
+import api.models.http.ChildPostDTO;
 
 public class Child {
+  private UUID id;
   private String firstname;
   private String lastname;
   private Date birthDate;
@@ -17,14 +20,19 @@ public class Child {
   private ArrayList<Activity> activities;
   private ArrayList<Allergen> allergens;
 
-  public Child(String firstname, String lastname, Date birthDate, Gender gender, boolean dependent) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.birthDate = birthDate;
-    this.gender = gender;
-    this.dependent = dependent;
+  public Child(UUID id, ChildPostDTO childPostDTO) {
+    this.id = id;
+    this.firstname = childPostDTO.getFirstname();
+    this.lastname = childPostDTO.getLastname();
+    this.birthDate = childPostDTO.getBirthDate();
+    this.gender = childPostDTO.getGender();
+    this.dependent = childPostDTO.getDependent();
     this.activities = new ArrayList<Activity>();
     this.allergens = new ArrayList<Allergen>();
+  }
+
+  public UUID getId() {
+    return id;
   }
 
   public String getFirstname() {
@@ -35,12 +43,12 @@ public class Child {
     return lastname;
   }
 
-  public Date getBirthDate() {
-    return birthDate;
+  public Gender getGender() {
+    return gender;
   }
 
-  public Gender getSexe() {
-    return gender;
+  public Date getBirthDate() {
+    return birthDate;
   }
 
   public boolean isDependent() {

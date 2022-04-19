@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import api.models.http.ChildPostDTO;
+
 public class Parent extends User {
   private double coefNumber;
   private double annualIncome;
@@ -41,8 +43,8 @@ public class Parent extends User {
     return children;
   }
 
-  public void addChild(Child child) {
-    this.children.add(child);
+  public void addChild(ChildPostDTO childPostDTO) {
+    this.children.add(new Child(UUID.randomUUID(), childPostDTO));
     this.computeCoefNumber(this, this.annualIncome);
   }
 
