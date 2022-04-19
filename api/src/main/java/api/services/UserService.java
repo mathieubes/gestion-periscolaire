@@ -48,8 +48,8 @@ public class UserService {
   // #endregion
 
   // #region Get parent by Id
-  public Parent getParentByID(String uuid) {
-    return this.parents.stream().filter(parent -> UUID.fromString(uuid).equals(parent.getId())).findFirst()
+  public Parent getParentByID(String id) {
+    return this.parents.stream().filter(parent -> UUID.fromString(id).equals(parent.getId())).findFirst()
         .orElse(null);
   }
   // #endregion
@@ -64,6 +64,14 @@ public class UserService {
     Parent parent = new Parent(id, userPostDTO.getFirstname(), userPostDTO.getLastname(), hashedPassword,
         userPostDTO.getEmail(), userPostDTO.getAddress(), userPostDTO.getPhoneNumber());
     this.parents.add(parent);
+    return parent;
+  }
+  // #endregion
+
+  // #region Update existing parent
+  public Parent updateParent(UserPostDTO userPostDTO, String id) {
+    Parent parent = getParentByID(id);
+    parent.setPersonalInfo(userPostDTO);
     return parent;
   }
   // #endregion

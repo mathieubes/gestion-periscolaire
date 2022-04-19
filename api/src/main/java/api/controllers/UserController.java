@@ -58,6 +58,19 @@ public class UserController {
   }
   // #endregion
 
+  // #region Update existing parent
+  @RequestMapping(value = "/parents/{id}/update", method = RequestMethod.POST)
+  public ResponseEntity<String> updateParent(@Valid @RequestBody UserPostDTO userPostDTO, @PathVariable String id)
+      throws JsonProcessingException {
+    try {
+      Parent toReturn = userService.updateParent(userPostDTO, id);
+      return ResponseEntity.ok(jsonService.stringify("parent", toReturn));
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
+
   // #region Add child
   @RequestMapping(value = "/parents/{id}/children/add", method = RequestMethod.POST)
   public ResponseEntity<String> addChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id)

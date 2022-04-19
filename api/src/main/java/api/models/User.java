@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import api.models.http.UserPostDTO;
+
 public abstract class User {
   private UUID id;
   private String firstname;
@@ -53,6 +55,17 @@ public abstract class User {
 
   public String getPhoneNumber() {
     return phoneNumber;
+  }
+
+  public User setPersonalInfo(UserPostDTO userPostDTO) {
+    this.firstname = userPostDTO.getFirstname();
+    this.lastname = userPostDTO.getLastname();
+    this.password = userPostDTO.getPassword();
+    this.email = userPostDTO.getEmail();
+    this.address = userPostDTO.getAddress();
+    this.phoneNumber = userPostDTO.getPhoneNumber();
+
+    return this;
   }
 
 }
