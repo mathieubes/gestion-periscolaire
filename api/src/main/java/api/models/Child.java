@@ -63,4 +63,13 @@ public class Child {
     return this.allergens;
   }
 
+  public Child setPersonalInfo(ChildPostDTO childPostDTO) {
+    this.firstname = childPostDTO.getFirstname();
+    this.lastname = childPostDTO.getLastname();
+    this.birthDate = childPostDTO.getBirthDate();
+    this.gender = childPostDTO.getGender();
+
+    return this;
+  }
+
 }

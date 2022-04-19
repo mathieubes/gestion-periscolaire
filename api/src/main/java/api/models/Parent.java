@@ -54,6 +54,10 @@ public class Parent extends User {
     }).count();
   }
 
+  public Child childById(String id) {
+    return this.children.stream().filter(child -> UUID.fromString(id).equals(child.getId())).findFirst().orElse(null);
+  }
+
   // Formula used by the Evry City Council
   private double computeCoefNumber(Parent parent, double annualIncome) {
     if (parent != null) {

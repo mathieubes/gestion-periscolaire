@@ -41,20 +41,20 @@ public class UserService {
     florian.addChild(new ChildPostDTO("Sara", "Mexican", new Date(), Gender.FEMALE, false));
   }
 
-  //#region Get parents
+  // #region Get parents
   public ArrayList<Parent> getParents() {
     return parents;
   }
-  //#endregion
+  // #endregion
 
-  //#region Get parent by Id
+  // #region Get parent by Id
   public Parent getParentByID(String uuid) {
     return this.parents.stream().filter(parent -> UUID.fromString(uuid).equals(parent.getId())).findFirst()
         .orElse(null);
   }
-  //#endregion
+  // #endregion
 
-  //#region Add parent
+  // #region Add parent
   public Parent addParent(UserPostDTO userPostDTO) {
     UUID id = UUID.randomUUID();
 
@@ -66,24 +66,33 @@ public class UserService {
     this.parents.add(parent);
     return parent;
   }
-  //#endregion
+  // #endregion
 
-  //#region Add child
+  // #region Add child
   public ArrayList<Child> addChild(ChildPostDTO childPostDTO, String id) {
     Parent parent = this.getParentByID(id);
     parent.addChild(childPostDTO);
     return parent.getChildren();
   }
-  //#endregion
+  // #endregion
 
-  //#region Delete parent
+  // #region Update existing child
+  public Child updateChild(ChildPostDTO childPostDTO, String parentId, String childId) {
+    Parent parent = getParentByID(parentId);
+    Child child = parent.childById(childId);
+    child.setPersonalInfo(childPostDTO);
+    return child;
+  }
+  // #endregion
+
+  // #region Delete parent
   public void deleteParent(String _id) {
     UUID id = UUID.fromString(_id);
     this.parents.removeIf(parent -> (parent.getId().equals(id)));
   }
-  //#endregion
+  // #endregion
 
-  //#region Signin
+  // #region Signin
   public Optional<Parent> areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {
     Optional<Parent> parentFound = this.parents.stream().filter(parent -> {
       boolean isEmailEqual = parent.getEmail().equals(signinPostDTO.getEmail());
@@ -97,6 +106,6 @@ public class UserService {
 
     return parentFound;
   }
-  //#endregion
+  // #endregion
 
 }
