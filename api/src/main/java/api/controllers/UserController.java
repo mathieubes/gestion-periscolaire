@@ -19,17 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import api.models.Child;
 import api.models.Parent;
 import api.services.UserService;
-import api.services.JsonService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users/parents")
 public class UserController {
 
   // #region Properties
-  @Autowired
-  JsonService jsonService;
-
   @Autowired
   UserService userService;
 
@@ -37,7 +33,7 @@ public class UserController {
   // #endregion
 
   // #region Get parents
-  @RequestMapping(value = "/parents", method = RequestMethod.GET)
+  @RequestMapping(value = "", method = RequestMethod.GET)
   public ResponseEntity<String> getParents() throws JsonProcessingException {
     try {
       ArrayList<Parent> parents = userService.getParents();
@@ -50,7 +46,7 @@ public class UserController {
   // #endregion
 
   // #region Add parent
-  @RequestMapping(value = "/parents/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/add", method = RequestMethod.POST)
   public ResponseEntity<String> addParent(@Valid @RequestBody UserPostDTO userPostDTO) throws JsonProcessingException {
     try {
       Parent toReturn = userService.addParent(userPostDTO);
@@ -62,7 +58,7 @@ public class UserController {
   // #endregion
 
   // #region Update existing parent
-  @RequestMapping(value = "/parents/{id}/update", method = RequestMethod.POST)
+  @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
   public ResponseEntity<String> updateParent(@Valid @RequestBody UserPostDTO userPostDTO, @PathVariable String id)
       throws JsonProcessingException {
     try {
@@ -75,7 +71,7 @@ public class UserController {
   // #endregion
 
   // #region Add child
-  @RequestMapping(value = "/parents/{id}/children/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/{id}/children/add", method = RequestMethod.POST)
   public ResponseEntity<String> addChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id)
       throws JsonProcessingException {
     try {
@@ -88,7 +84,7 @@ public class UserController {
   // #endregion
 
   // #region Update existing child
-  @RequestMapping(value = "/parents/{id}/children/{childId}/update", method = RequestMethod.POST)
+  @RequestMapping(value = "/{id}/children/{childId}/update", method = RequestMethod.POST)
   public ResponseEntity<String> updateChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id,
       @PathVariable String childId)
       throws JsonProcessingException {
@@ -102,7 +98,7 @@ public class UserController {
   // #endregion
 
   // #region Delete parent
-  @RequestMapping(value = "/parents/{id}", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Void> deleteParent(@PathVariable String id) {
     try {
       userService.deleteParent(id);
@@ -114,7 +110,7 @@ public class UserController {
   // #endregion
 
   // #region Signin
-  @RequestMapping(value = "/parents/signin", method = RequestMethod.POST)
+  @RequestMapping(value = "/signin", method = RequestMethod.POST)
   public ResponseEntity<String> signin(@RequestBody SigninPostDTO signinPostDTO) throws JsonProcessingException {
     try {
       Optional<Parent> toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
@@ -130,7 +126,7 @@ public class UserController {
   // #endregion
 
   // #region Get coef number
-  @RequestMapping(value = "/parents/{id}/fiscal", method = RequestMethod.GET)
+  @RequestMapping(value = "/{id}/fiscal", method = RequestMethod.GET)
   public ResponseEntity<String> getParentCoef(@PathVariable("id") String parentID,
       @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
     try {
