@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import api.models.Child;
 import api.models.Parent;
-import api.services.UserService;
+import api.services.ParentService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -27,7 +27,7 @@ public class ParentController {
 
   // #region Properties
   @Autowired
-  UserService userService;
+  ParentService userService;
 
   private ObjectMapper objectMapper = new ObjectMapper();
   // #endregion

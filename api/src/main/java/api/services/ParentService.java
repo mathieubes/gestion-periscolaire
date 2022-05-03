@@ -22,7 +22,7 @@ import api.services.env.EnvGlobalUseService;
 
 @Service
 @Scope("singleton")
-public class UserService {
+public class ParentService {
   private ArrayList<Parent> parents = new ArrayList<>();
 
   @PostConstruct
