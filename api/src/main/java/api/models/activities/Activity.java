@@ -3,6 +3,8 @@ package api.models.activities;
 import java.util.Date;
 import java.util.UUID;
 
+import api.models.http.ActivityPostDTO;
+
 public class Activity {
   private UUID id;
   private String name;
@@ -21,6 +23,16 @@ public class Activity {
     this.capacity = capacity;
     this.minSupervisors = minSupervisors;
     this.price = price;
+  }
+
+  public Activity(UUID id, ActivityPostDTO activityPostDTO) {
+    this.id = id;
+    this.name = activityPostDTO.getName();
+    this.date = activityPostDTO.getDate();
+    this.duration = activityPostDTO.getDuration();
+    this.capacity = activityPostDTO.getCapacity();
+    this.minSupervisors = activityPostDTO.getMinSupervisors();
+    this.price = activityPostDTO.getPrice();
   }
 
   public UUID getId() {
