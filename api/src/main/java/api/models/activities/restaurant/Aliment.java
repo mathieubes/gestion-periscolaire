@@ -30,7 +30,7 @@ public class Aliment {
     return this.mealType;
   }
 
-  public UUID getUuid() {
+  public UUID getId() {
     return this.id;
   }
 }
