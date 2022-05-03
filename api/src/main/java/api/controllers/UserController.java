@@ -10,6 +10,7 @@ import api.models.http.SigninPostDTO;
 import api.models.http.UserPostDTO;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,8 @@ public class UserController {
 
   @Autowired
   UserService userService;
+
+  private ObjectMapper objectMapper = new ObjectMapper();
   // #endregion
 
   // #region Get parents
@@ -38,7 +41,7 @@ public class UserController {
   public ResponseEntity<String> getParents() throws JsonProcessingException {
     try {
       ArrayList<Parent> parents = userService.getParents();
-      String toReturn = jsonService.stringify("parents", parents);
+      String toReturn = this.objectMapper.writeValueAsString(parents);
       return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
       throw e;
@@ -51,7 +54,7 @@ public class UserController {
   public ResponseEntity<String> addParent(@Valid @RequestBody UserPostDTO userPostDTO) throws JsonProcessingException {
     try {
       Parent toReturn = userService.addParent(userPostDTO);
-      return ResponseEntity.ok(jsonService.stringify("parent", toReturn));
+      return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
     }
@@ -64,7 +67,7 @@ public class UserController {
       throws JsonProcessingException {
     try {
       Parent toReturn = userService.updateParent(userPostDTO, id);
-      return ResponseEntity.ok(jsonService.stringify("parent", toReturn));
+      return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
     }
@@ -77,7 +80,7 @@ public class UserController {
       throws JsonProcessingException {
     try {
       ArrayList<Child> toReturn = userService.addChild(childPostDTO, id);
-      return ResponseEntity.ok(jsonService.stringify("children", toReturn));
+      return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
     }
@@ -91,7 +94,7 @@ public class UserController {
       throws JsonProcessingException {
     try {
       Child toReturn = userService.updateChild(childPostDTO, id, childId);
-      return ResponseEntity.ok(jsonService.stringify("child", toReturn));
+      return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
     }
@@ -116,7 +119,7 @@ public class UserController {
     try {
       Optional<Parent> toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
       if (toReturn.isPresent()) {
-        return ResponseEntity.ok(jsonService.stringify("parent", toReturn.get()));
+        return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn.get()));
       } else {
         return ResponseEntity.badRequest().build();
       }
@@ -133,7 +136,7 @@ public class UserController {
     try {
       final var parent = this.userService.getParentByID(parentID);
 
-      String toReturn = jsonService.stringify("fiscalCoef", parent.getCoefNumber(annualIncome));
+      String toReturn = this.objectMapper.writeValueAsString(parent.getCoefNumber(annualIncome));
       return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
       throw e;

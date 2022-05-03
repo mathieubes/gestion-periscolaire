@@ -1,6 +1,7 @@
 package api.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,11 @@ public class CheckHealthController {
   @Autowired
   JsonService jsonService;
 
+  private ObjectMapper objectMapper = new ObjectMapper();
+
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public ResponseEntity<String> checkHealth() throws JsonProcessingException {
-    String toReturn = jsonService.stringify("status", "Ok");
+    String toReturn = this.objectMapper.writeValueAsString("Health ok");
     return ResponseEntity.ok(toReturn);
   }
 
