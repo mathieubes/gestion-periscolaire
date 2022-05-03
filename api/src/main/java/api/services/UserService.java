@@ -29,7 +29,7 @@ public class UserService {
     addParent(new UserPostDTO("Mathieu", "BES", "pwdTest1", "matDu91@gmail.fr", "surLaA6", "06qlqchose"));
     addParent(new UserPostDTO("Garik", "DERMINJYAN", "pwdTest2", "gd@gmail.fr", "surLePeriph", "07qlqchose"));
     addParent(new UserPostDTO("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218"));
-    addParent(new UserPostDTO("Fawaz", "MOUSSOUGAN", "pwdTest4", "criminal@gmail.fr", "unknown", "Call the police"));
+    addParent(new UserPostDTO("Fawaz", "MOUSSOUGAN", "pwdTest4", "test@gmail.fr", "unknown", "Call"));
   }
 
   public ArrayList<Parent> getParents() {
