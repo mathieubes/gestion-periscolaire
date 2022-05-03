@@ -23,7 +23,7 @@ import api.services.UserService;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users/parents")
-public class UserController {
+public class ParentController {
 
   // #region Properties
   @Autowired
