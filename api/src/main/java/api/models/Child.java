@@ -8,8 +8,7 @@ import javax.persistence.TemporalType;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
-import java.util.Set;
+import java.util.UUID; 
 import java.util.List;
 
 import api.models.activities.*;

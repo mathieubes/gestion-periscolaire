@@ -30,7 +30,7 @@ public abstract class User {
 
   @Column(name = "Phone_Number", length = 256, nullable = false)
   private String phoneNumber;
-
+  
   public User(){};
 
   public User(UUID id, String firstname, String lastname, String password, String email, String address,
