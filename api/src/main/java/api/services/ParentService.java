@@ -132,4 +132,12 @@ public class ParentService {
   }
   // #endregion
 
+  // #region Unsuscribe child from activity
+  public void unsuscribeChildFromActivity(String parentId, String childId, String activityId) {
+    Activity activity = this.activityService.getActivitybyId(activityId);
+    Parent parent = this.getParentByID(parentId);
+    Child child = parent.childById(childId);
+    child.unsubscribeFromActivity(activity);
+  }
+  // #endregion
 }
