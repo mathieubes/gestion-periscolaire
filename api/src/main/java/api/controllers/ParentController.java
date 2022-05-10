@@ -139,4 +139,20 @@ public class ParentController {
     }
   }
   // #endregion
+
+  // #region Register child to activity
+  @RequestMapping(value = "/{id}/children/{childId}/activities/{activityId}/add", method = RequestMethod.POST)
+  public ResponseEntity<String> updateChild(
+      @PathVariable String id,
+      @PathVariable String childId,
+      @PathVariable String activityId)
+      throws JsonProcessingException {
+    try {
+      this.userService.registerChildToActivity(id, childId, activityId);
+      return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
 }

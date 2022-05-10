@@ -33,4 +33,9 @@ public class ActivityService {
   public ArrayList<Activity> getActivities() {
     return this.activities;
   }
+
+  public Activity getActivitybyId(String id) {
+    return this.activities.stream().filter(parent -> UUID.fromString(id).equals(parent.getId())).findFirst()
+        .orElse(null);
+  }
 }

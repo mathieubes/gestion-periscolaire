@@ -63,6 +63,14 @@ public class Child {
     return this.allergens;
   }
 
+  public void registerToActivity(Activity activity) {
+    this.activities.add(activity);
+  }
+
+  public void unsubscribeFromActivity(Activity activity) {
+    this.activities.removeIf(el -> el.getId().equals(activity.getId()));
+  }
+
   public Child setPersonalInfo(ChildPostDTO childPostDTO) {
     this.firstname = childPostDTO.getFirstname();
     this.lastname = childPostDTO.getLastname();

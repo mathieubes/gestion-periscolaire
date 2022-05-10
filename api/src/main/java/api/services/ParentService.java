@@ -11,10 +11,12 @@ import api.models.http.UserPostDTO;
 
 import com.google.common.hash.Hashing;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import api.models.Parent;
+import api.models.activities.Activity;
 import api.models.enums.EnvKey;
 import api.models.http.ChildPostDTO;
 import api.models.http.SigninPostDTO;
@@ -24,6 +26,9 @@ import api.services.env.EnvGlobalUseService;
 @Scope("singleton")
 public class ParentService {
   private ArrayList<Parent> parents = new ArrayList<>();
+
+  @Autowired
+  ActivityService activityService;
 
   @PostConstruct
   private void initFakeParents() {
@@ -115,6 +120,15 @@ public class ParentService {
     }).findFirst();
 
     return parentFound;
+  }
+  // #endregion
+
+  // #region Register child to activity
+  public void registerChildToActivity(String parentId, String childId, String activityId) {
+    Activity activity = this.activityService.getActivitybyId(activityId);
+    Parent parent = this.getParentByID(parentId);
+    Child child = parent.childById(childId);
+    child.registerToActivity(activity);
   }
   // #endregion
 
