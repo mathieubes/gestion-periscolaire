@@ -130,7 +130,8 @@ public class ParentService {
     Activity activity = this.activityService.getActivitybyId(activityId);
     Parent parent = this.getParentByID(parentId);
     Child child = parent.childById(childId);
-    child.registerToActivity(activity);
+    if (!this.isChildAlreadySuscribedToGivenActivity(child, activity.getId().toString()))
+      child.registerToActivity(activity);
   }
   // #endregion
 
@@ -147,7 +148,9 @@ public class ParentService {
   public void addAllergenToChild(String parentId, String childId, AllergenPostDTO allergenPostDTO) {
     Parent parent = this.getParentByID(parentId);
     Child child = parent.childById(childId);
-    child.addAllergen(new Allergen(allergenPostDTO.getCode(), allergenPostDTO.getName()));
+    Allergen allergen = new Allergen(allergenPostDTO.getCode(), allergenPostDTO.getName());
+    if (!this.isChildAlreadyHasGivenAllergen(child, allergen))
+      child.addAllergen(allergen);
   }
   // #endregion
 

@@ -73,7 +73,7 @@ public class ParentController {
   // #endregion
 
   // #region Add child
-  @RequestMapping(value = "/{id}/children/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/{id}/children", method = RequestMethod.POST)
   public ResponseEntity<String> addChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id)
       throws JsonProcessingException {
     try {
@@ -143,7 +143,7 @@ public class ParentController {
   // #endregion
 
   // #region Register child to activity
-  @RequestMapping(value = "/{id}/children/{childId}/activities/{activityId}/add", method = RequestMethod.POST)
+  @RequestMapping(value = "/{id}/children/{childId}/activities/{activityId}", method = RequestMethod.POST)
   public ResponseEntity<String> registerChildToActivity(
       @PathVariable String id,
       @PathVariable String childId,
