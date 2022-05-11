@@ -16,4 +16,13 @@ public class Allergen {
   public String getName() {
     return this.name;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof Allergen) {
+      Allergen allergen = (Allergen) o;
+      return this.getCode().equals(allergen.getCode()) && this.getName().equals(allergen.getName());
+    } else
+      return false;
+  }
 }
