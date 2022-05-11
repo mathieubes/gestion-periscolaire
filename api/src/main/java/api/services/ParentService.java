@@ -167,10 +167,10 @@ public class ParentService {
   // #endregion
 
   // #region Check if a child already has an allergen
-  // public boolean isChildAlreadyHasGivenAllergen(Child child, Allergen allergen) {
-  //   ArrayList<Allergen> allergens = child.getAllergens();
-  //   return allergens.contains(allergen);
-  // }
+  public boolean isChildAlreadyHasGivenAllergen(Child child, Allergen allergen) {
+    ArrayList<Allergen> allergens = child.getAllergens();
+    return allergens.contains(allergen);
+  }
   // #endregion
 
 }
