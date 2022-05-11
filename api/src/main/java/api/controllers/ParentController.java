@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import api.models.http.AllergenPostDTO;
 import api.models.http.ChildPostDTO;
 import api.models.http.SigninPostDTO;
 import api.models.http.UserPostDTO;
@@ -28,7 +29,7 @@ public class ParentController {
 
   // #region Properties
   @Autowired
-  ParentService userService;
+  ParentService parentService;
 
   private ObjectMapper objectMapper = new ObjectMapper();
   // #endregion
@@ -37,7 +38,7 @@ public class ParentController {
   @RequestMapping(value = "", method = RequestMethod.GET)
   public ResponseEntity<String> getParents() throws JsonProcessingException {
     try {
-      ArrayList<Parent> parents = userService.getParents();
+      ArrayList<Parent> parents = parentService.getParents();
       String toReturn = this.objectMapper.writeValueAsString(parents);
       return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
@@ -50,7 +51,7 @@ public class ParentController {
   @RequestMapping(value = "", method = RequestMethod.POST)
   public ResponseEntity<String> addParent(@Valid @RequestBody UserPostDTO userPostDTO) throws JsonProcessingException {
     try {
-      Parent toReturn = userService.addParent(userPostDTO);
+      Parent toReturn = parentService.addParent(userPostDTO);
       return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
@@ -63,7 +64,7 @@ public class ParentController {
   public ResponseEntity<String> updateParent(@Valid @RequestBody UserPostDTO userPostDTO, @PathVariable String id)
       throws JsonProcessingException {
     try {
-      Parent toReturn = userService.updateParent(userPostDTO, id);
+      Parent toReturn = parentService.updateParent(userPostDTO, id);
       return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
@@ -76,7 +77,7 @@ public class ParentController {
   public ResponseEntity<String> addChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id)
       throws JsonProcessingException {
     try {
-      ArrayList<Child> toReturn = userService.addChild(childPostDTO, id);
+      ArrayList<Child> toReturn = parentService.addChild(childPostDTO, id);
       return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
@@ -90,7 +91,7 @@ public class ParentController {
       @PathVariable String childId)
       throws JsonProcessingException {
     try {
-      Child toReturn = userService.updateChild(childPostDTO, id, childId);
+      Child toReturn = parentService.updateChild(childPostDTO, id, childId);
       return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
       throw e;
@@ -102,7 +103,7 @@ public class ParentController {
   @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
   public ResponseEntity<Void> deleteParent(@PathVariable String id) {
     try {
-      userService.deleteParent(id);
+      parentService.deleteParent(id);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;
@@ -114,7 +115,7 @@ public class ParentController {
   @RequestMapping(value = "/signin", method = RequestMethod.POST)
   public ResponseEntity<String> signin(@RequestBody SigninPostDTO signinPostDTO) throws JsonProcessingException {
     try {
-      Optional<Parent> toReturn = userService.areSigninCredentialsCorrect(signinPostDTO);
+      Optional<Parent> toReturn = parentService.areSigninCredentialsCorrect(signinPostDTO);
       if (toReturn.isPresent()) {
         return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn.get()));
       } else {
@@ -131,7 +132,7 @@ public class ParentController {
   public ResponseEntity<String> getParentCoef(@PathVariable("id") String parentID,
       @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
     try {
-      final var parent = this.userService.getParentByID(parentID);
+      final var parent = this.parentService.getParentByID(parentID);
 
       String toReturn = this.objectMapper.writeValueAsString(parent.getCoefNumber(annualIncome));
       return ResponseEntity.ok(toReturn);
@@ -149,7 +150,7 @@ public class ParentController {
       @PathVariable String activityId)
       throws JsonProcessingException {
     try {
-      this.userService.registerChildToActivity(id, childId, activityId);
+      this.parentService.registerChildToActivity(id, childId, activityId);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;
@@ -165,7 +166,7 @@ public class ParentController {
       @PathVariable String activityId)
       throws JsonProcessingException {
     try {
-      this.userService.unsuscribeChildFromActivity(id, childId, activityId);
+      this.parentService.unsuscribeChildFromActivity(id, childId, activityId);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;
@@ -178,10 +179,10 @@ public class ParentController {
   public ResponseEntity<String> addAllergenToChild(
       @PathVariable String id,
       @PathVariable String childId,
-      @RequestBody Allergen allergen)
+      @Valid @RequestBody AllergenPostDTO allergenPostDTO)
       throws JsonProcessingException {
     try {
-      this.userService.addAllergenToChild(id, childId, allergen);
+      this.parentService.addAllergenToChild(id, childId, allergenPostDTO);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;
@@ -197,7 +198,7 @@ public class ParentController {
       @RequestBody Allergen allergen)
       throws JsonProcessingException {
     try {
-      this.userService.removeAllergenFromChild(id, childId, allergen);
+      this.parentService.removeAllergenFromChild(id, childId, allergen);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;

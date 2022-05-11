@@ -19,6 +19,7 @@ import api.models.Parent;
 import api.models.activities.Activity;
 import api.models.activities.restaurant.Allergen;
 import api.models.enums.EnvKey;
+import api.models.http.AllergenPostDTO;
 import api.models.http.ChildPostDTO;
 import api.models.http.SigninPostDTO;
 import api.services.env.EnvGlobalUseService;
@@ -143,10 +144,10 @@ public class ParentService {
   // #endregion
 
   // #region Add allergen to child
-  public void addAllergenToChild(String parentId, String childId, Allergen allergen) {
+  public void addAllergenToChild(String parentId, String childId, AllergenPostDTO allergenpDto) {
     Parent parent = this.getParentByID(parentId);
     Child child = parent.childById(childId);
-    child.addAllergen(allergen);
+    child.addAllergen(new Allergen(allergenpDto.getCode(), allergenpDto.getName()));
   }
   // #endregion
 
