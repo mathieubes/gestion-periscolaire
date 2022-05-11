@@ -1,5 +1,14 @@
 # Gestion périscolaire
 
+## Auteurs
+- **Mathieu BES**
+- **Florian CARBONI**
+- **Fawaz MOUSSOUGAN**
+- **Garik DERMINJYAN**
+
+
+## Activités
+
 - [ ] Accueil du matin
 - [ ] Goûter du soir 🥐
 - [ ] Cantine
@@ -39,8 +48,6 @@
 - [ ] US-18 : En tant que périscolaire, je souhaite pouvoir me déconnecter
 - [ ] US-19 : En tant que périscolaire, je dois pouvoir CRUD des congés
 - [ ] US-20 : En tant que périscolaire, je souhaite consulter les details concernant les inscriptions aux activités
-
-
 
 
 > CRUD = Create Read Update Delete = Ajouter Lire Modifier Supprimer
