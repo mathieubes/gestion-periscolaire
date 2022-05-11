@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import api.models.Child;
 import api.models.Parent;
-import api.models.activities.restaurant.Allergen;
+
 import api.services.ParentService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -195,10 +195,10 @@ public class ParentController {
   public ResponseEntity<String> removeAllergenFromChild(
       @PathVariable String id,
       @PathVariable String childId,
-      @RequestBody Allergen allergen)
+      @Valid @RequestBody AllergenPostDTO allergenPostDTO)
       throws JsonProcessingException {
     try {
-      this.parentService.removeAllergenFromChild(id, childId, allergen);
+      this.parentService.removeAllergenFromChild(id, childId, allergenPostDTO);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;

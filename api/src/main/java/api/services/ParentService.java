@@ -144,18 +144,18 @@ public class ParentService {
   // #endregion
 
   // #region Add allergen to child
-  public void addAllergenToChild(String parentId, String childId, AllergenPostDTO allergenpDto) {
+  public void addAllergenToChild(String parentId, String childId, AllergenPostDTO allergenPostDTO) {
     Parent parent = this.getParentByID(parentId);
     Child child = parent.childById(childId);
-    child.addAllergen(new Allergen(allergenpDto.getCode(), allergenpDto.getName()));
+    child.addAllergen(new Allergen(allergenPostDTO.getCode(), allergenPostDTO.getName()));
   }
   // #endregion
 
   // #region Remove allergen from child
-  public void removeAllergenFromChild(String parentId, String childId, Allergen allergen) {
+  public void removeAllergenFromChild(String parentId, String childId, AllergenPostDTO allergenPostDTO) {
     Parent parent = this.getParentByID(parentId);
     Child child = parent.childById(childId);
-    child.removeAllergen(allergen);
+    child.removeAllergen(new Allergen(allergenPostDTO.getCode(), allergenPostDTO.getName()));
   }
   // #endregion
 }
