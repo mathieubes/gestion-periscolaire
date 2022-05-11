@@ -72,6 +72,18 @@ public class ParentController {
   }
   // #endregion
 
+  // #region Delete parent
+  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+  public ResponseEntity<Void> deleteParent(@PathVariable String id) {
+    try {
+      parentService.deleteParent(id);
+      return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
+
   // #region Add child
   @RequestMapping(value = "/{id}/children", method = RequestMethod.POST)
   public ResponseEntity<String> addChild(@Valid @RequestBody ChildPostDTO childPostDTO, @PathVariable String id)
@@ -99,43 +111,15 @@ public class ParentController {
   }
   // #endregion
 
-  // #region Delete parent
-  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<Void> deleteParent(@PathVariable String id) {
+  // #region Delete child
+  @RequestMapping(value = "/{id}/children/{childId}", method = RequestMethod.DELETE)
+  public ResponseEntity<String> deleteChild(
+      @PathVariable String id,
+      @PathVariable String childId)
+      throws JsonProcessingException {
     try {
-      parentService.deleteParent(id);
+      this.parentService.deleteChild(id, childId);
       return ResponseEntity.ok().build();
-    } catch (Exception e) {
-      throw e;
-    }
-  }
-  // #endregion
-
-  // #region Signin
-  @RequestMapping(value = "/signin", method = RequestMethod.POST)
-  public ResponseEntity<String> signin(@RequestBody SigninPostDTO signinPostDTO) throws JsonProcessingException {
-    try {
-      Optional<Parent> toReturn = parentService.areSigninCredentialsCorrect(signinPostDTO);
-      if (toReturn.isPresent()) {
-        return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn.get()));
-      } else {
-        return ResponseEntity.badRequest().build();
-      }
-    } catch (Exception e) {
-      throw e;
-    }
-  }
-  // #endregion
-
-  // #region Get coef number
-  @RequestMapping(value = "/{id}/fiscal", method = RequestMethod.GET)
-  public ResponseEntity<String> getParentCoef(@PathVariable("id") String parentID,
-      @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
-    try {
-      final var parent = this.parentService.getParentByID(parentID);
-
-      String toReturn = this.objectMapper.writeValueAsString(parent.getCoefNumber(annualIncome));
-      return ResponseEntity.ok(toReturn);
     } catch (Exception e) {
       throw e;
     }
@@ -205,4 +189,36 @@ public class ParentController {
     }
   }
   // #endregion
+
+  // #region Signin
+  @RequestMapping(value = "/signin", method = RequestMethod.POST)
+  public ResponseEntity<String> signin(@RequestBody SigninPostDTO signinPostDTO) throws JsonProcessingException {
+    try {
+      Optional<Parent> toReturn = parentService.areSigninCredentialsCorrect(signinPostDTO);
+      if (toReturn.isPresent()) {
+        return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn.get()));
+      } else {
+        return ResponseEntity.badRequest().build();
+      }
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
+
+  // #region Get coef number
+  @RequestMapping(value = "/{id}/fiscal", method = RequestMethod.GET)
+  public ResponseEntity<String> getParentCoef(@PathVariable("id") String parentID,
+      @RequestParam(name = "annualIncome") Double annualIncome) throws JsonProcessingException {
+    try {
+      final var parent = this.parentService.getParentByID(parentID);
+
+      String toReturn = this.objectMapper.writeValueAsString(parent.getCoefNumber(annualIncome));
+      return ResponseEntity.ok(toReturn);
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
+
 }

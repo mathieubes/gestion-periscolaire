@@ -48,6 +48,10 @@ public class Parent extends User {
     this.computeCoefNumber(this, this.annualIncome);
   }
 
+  public void removeChild(String id) {
+    this.children.removeIf(child -> child.getId().toString().equals(id));
+  }
+
   public int getDependentChildrenCount() {
     return (int) this.children.stream().filter(child -> {
       return child.isDependent();

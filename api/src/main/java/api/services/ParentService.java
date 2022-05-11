@@ -85,6 +85,13 @@ public class ParentService {
   }
   // #endregion
 
+  // #region Delete parent
+  public void deleteParent(String _id) {
+    UUID id = UUID.fromString(_id);
+    this.parents.removeIf(parent -> (parent.getId().equals(id)));
+  }
+  // #endregion
+
   // #region Add child
   public ArrayList<Child> addChild(ChildPostDTO childPostDTO, String id) {
     Parent parent = this.getParentByID(id);
@@ -102,26 +109,10 @@ public class ParentService {
   }
   // #endregion
 
-  // #region Delete parent
-  public void deleteParent(String _id) {
-    UUID id = UUID.fromString(_id);
-    this.parents.removeIf(parent -> (parent.getId().equals(id)));
-  }
-  // #endregion
-
-  // #region Signin
-  public Optional<Parent> areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {
-    Optional<Parent> parentFound = this.parents.stream().filter(parent -> {
-      boolean isEmailEqual = parent.getEmail().equals(signinPostDTO.getEmail());
-
-      String saltedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + signinPostDTO.getPassword();
-      String hashedPassword = Hashing.sha256().hashString(saltedPassword, StandardCharsets.UTF_8).toString();
-      boolean isPasswordEqual = parent.getPassword().equals(hashedPassword);
-
-      return (isEmailEqual && isPasswordEqual);
-    }).findFirst();
-
-    return parentFound;
+  // #region Delete child
+  public void deleteChild(String parentId, String childId) {
+    Parent parent = this.getParentByID(parentId);
+    parent.removeChild(childId);
   }
   // #endregion
 
@@ -173,6 +164,22 @@ public class ParentService {
   public boolean isChildAlreadyHasGivenAllergen(Child child, Allergen allergen) {
     ArrayList<Allergen> allergens = child.getAllergens();
     return allergens.contains(allergen);
+  }
+  // #endregion
+
+  // #region Signin
+  public Optional<Parent> areSigninCredentialsCorrect(SigninPostDTO signinPostDTO) {
+    Optional<Parent> parentFound = this.parents.stream().filter(parent -> {
+      boolean isEmailEqual = parent.getEmail().equals(signinPostDTO.getEmail());
+
+      String saltedPassword = EnvGlobalUseService.getValue(EnvKey.SALT_HASH_KEY) + signinPostDTO.getPassword();
+      String hashedPassword = Hashing.sha256().hashString(saltedPassword, StandardCharsets.UTF_8).toString();
+      boolean isPasswordEqual = parent.getPassword().equals(hashedPassword);
+
+      return (isEmailEqual && isPasswordEqual);
+    }).findFirst();
+
+    return parentFound;
   }
   // #endregion
 
