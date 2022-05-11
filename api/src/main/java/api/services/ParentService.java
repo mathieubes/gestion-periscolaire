@@ -158,4 +158,19 @@ public class ParentService {
     child.removeAllergen(new Allergen(allergenPostDTO.getCode(), allergenPostDTO.getName()));
   }
   // #endregion
+
+  // #region Check if a child is already suscribed to an activity
+  public boolean isChildAlreadySuscribedToGivenActivity(Child child, String activityId) {
+    ArrayList<Activity> activities = child.getActivities();
+    return activities.contains(this.activityService.getActivitybyId(activityId));
+  }
+  // #endregion
+
+  // #region Check if a child already has an allergen
+  // public boolean isChildAlreadyHasGivenAllergen(Child child, Allergen allergen) {
+  //   ArrayList<Allergen> allergens = child.getAllergens();
+  //   return allergens.contains(allergen);
+  // }
+  // #endregion
+
 }
