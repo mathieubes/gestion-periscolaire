@@ -80,4 +80,11 @@ public class Child {
     return this;
   }
 
+  public void addAllergen(Allergen allergen) {
+    this.allergens.add(allergen);
+  }
+
+  public void removeAllergen(Allergen allergen) {
+    this.allergens.removeIf(el -> el.getCode().equals(allergen.getCode()) && el.getName().equals(allergen.getName()));
+  }
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import api.models.Parent;
 import api.models.activities.Activity;
+import api.models.activities.restaurant.Allergen;
 import api.models.enums.EnvKey;
 import api.models.http.ChildPostDTO;
 import api.models.http.SigninPostDTO;
@@ -138,6 +139,22 @@ public class ParentService {
     Parent parent = this.getParentByID(parentId);
     Child child = parent.childById(childId);
     child.unsubscribeFromActivity(activity);
+  }
+  // #endregion
+
+  // #region Add allergen to child
+  public void addAllergenToChild(String parentId, String childId, Allergen allergen) {
+    Parent parent = this.getParentByID(parentId);
+    Child child = parent.childById(childId);
+    child.addAllergen(allergen);
+  }
+  // #endregion
+
+  // #region Remove allergen from child
+  public void removeAllergenFromChild(String parentId, String childId, Allergen allergen) {
+    Parent parent = this.getParentByID(parentId);
+    Child child = parent.childById(childId);
+    child.removeAllergen(allergen);
   }
   // #endregion
 }

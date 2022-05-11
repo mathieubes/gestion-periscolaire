@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import api.models.Child;
 import api.models.Parent;
+import api.models.activities.restaurant.Allergen;
 import api.services.ParentService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -46,7 +47,7 @@ public class ParentController {
   // #endregion
 
   // #region Add parent
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+  @RequestMapping(value = "", method = RequestMethod.POST)
   public ResponseEntity<String> addParent(@Valid @RequestBody UserPostDTO userPostDTO) throws JsonProcessingException {
     try {
       Parent toReturn = userService.addParent(userPostDTO);
@@ -156,8 +157,8 @@ public class ParentController {
   }
   // #endregion
 
-  // #region Register child to activity
-  @RequestMapping(value = "/{id}/children/{childId}/activities/{activityId}/unsuscribe", method = RequestMethod.POST)
+  // #region Unsuscribe child to activity
+  @RequestMapping(value = "/{id}/children/{childId}/activities/{activityId}", method = RequestMethod.DELETE)
   public ResponseEntity<String> unsuscribeChildFromActivity(
       @PathVariable String id,
       @PathVariable String childId,
@@ -165,6 +166,38 @@ public class ParentController {
       throws JsonProcessingException {
     try {
       this.userService.unsuscribeChildFromActivity(id, childId, activityId);
+      return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
+
+  // #region Add allergen to child
+  @RequestMapping(value = "/{id}/children/{childId}/allergens", method = RequestMethod.POST)
+  public ResponseEntity<String> addAllergenToChild(
+      @PathVariable String id,
+      @PathVariable String childId,
+      @RequestBody Allergen allergen)
+      throws JsonProcessingException {
+    try {
+      this.userService.addAllergenToChild(id, childId, allergen);
+      return ResponseEntity.ok().build();
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
+
+  // #region Remove allergen from child
+  @RequestMapping(value = "/{id}/children/{childId}/allergens", method = RequestMethod.DELETE)
+  public ResponseEntity<String> removeAllergenFromChild(
+      @PathVariable String id,
+      @PathVariable String childId,
+      @RequestBody Allergen allergen)
+      throws JsonProcessingException {
+    try {
+      this.userService.removeAllergenFromChild(id, childId, allergen);
       return ResponseEntity.ok().build();
     } catch (Exception e) {
       throw e;
