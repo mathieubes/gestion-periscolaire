@@ -44,6 +44,7 @@ export const LoginPage: React.FC = () => {
     );
     if (res.data) {
       setParent!(res.data);
+      localStorage.setItem('loggedUser', JSON.stringify(res.data));
       navigate('/');
     } else setHasErrors(true);
 
