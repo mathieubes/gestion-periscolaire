@@ -1,0 +1,9 @@
+.card {
+  padding: 32px;
+  border: 1px solid rgba(#333, 0.25);
+  border-radius: 10px;
+
+  &__content {
+    margin-top: 32px;
+  }
+}

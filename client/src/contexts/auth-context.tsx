@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { IParent } from '../models/parent';
 
 interface IContext {
@@ -18,6 +18,10 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
   ) as IParent;
 
   const [parent, setParent] = useState<IParent>(user);
+
+  useEffect(() => {
+    localStorage.setItem('loggedUser', JSON.stringify(parent));
+  }, [parent]);
 
   return (
     <AuthContext.Provider value={{ parent, setParent }}>
