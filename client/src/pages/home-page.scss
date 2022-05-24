@@ -1,0 +1,26 @@
+.home-page {
+  &__dashboard {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16px;
+
+    &__item {
+      width: 100%;
+      display: flex;
+
+      div:first-child {
+        flex: 0.5;
+      }
+
+      div:nth-child(2) {
+        flex: 0.1;
+      }
+
+      div:last-child {
+        flex: 1;
+      }
+    }
+  }
+}

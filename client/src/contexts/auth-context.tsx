@@ -1,9 +1,9 @@
 import React, { useState, createContext } from 'react';
-import { IUser } from '../models/user';
+import { IParent } from '../models/parent';
 
 interface IContext {
-  user?: IUser;
-  setUser?: React.Dispatch<React.SetStateAction<IUser | undefined>>;
+  parent?: IParent;
+  setParent?: React.Dispatch<React.SetStateAction<IParent | undefined>>;
 }
 
 export const AuthContext = createContext<IContext>({});
@@ -13,10 +13,10 @@ interface IProps {
 }
 
 export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
-  const [user, setUser] = useState<IUser>();
+  const [parent, setParent] = useState<IParent>();
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ parent, setParent }}>
       {children}
     </AuthContext.Provider>
   );
