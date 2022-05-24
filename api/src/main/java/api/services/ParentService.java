@@ -193,7 +193,7 @@ public class ParentService {
       }
     }
 
-    return sum / parent.getCoefNumber();
+    return (sum * parent.getCoefNumber())/100;
   }
   // #endregion
 }
