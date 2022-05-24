@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "parents")
+@DiscriminatorValue("parent")
 public class Parent extends User {
 
   @Column(name = "fiscalNumber", nullable = false)

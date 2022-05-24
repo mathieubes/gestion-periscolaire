@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +18,12 @@ import api.models.Child;
 
 
 
+
 @Entity
-@Table(name = "Activities")
+@Table(name = "Activites")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE_ACTIVITE")
+
 public class Activity {
 
   @Id
@@ -28,6 +32,9 @@ public class Activity {
   
   @Column(name = "name", length = 256, nullable = false)
   private String name;
+
+ /* @Column(name = "menu", length = 256, nullable = false)
+   private Menu menu;*/
   
   @Temporal(value=TemporalType.DATE)
   @Column(name = "date", nullable = false)
@@ -45,7 +52,11 @@ public class Activity {
   @Column(name="price", length = 256, nullable = false)
   private double price;
 
-  @ManyToMany(mappedBy = "activities", cascade = CascadeType.ALL)
+  //@ManyToMany(mappedBy = "activities", cascade = CascadeType.ALL)
+  @ManyToMany
+  @JoinTable(name = "child_activities", 
+  joinColumns = @JoinColumn(name = "idActivity"), 
+  inverseJoinColumns = @JoinColumn(name = "id"))
   private List<Child> childPractics;
 
   public Activity(UUID id, String name, Date date, int duration, int capacity, int minSupervisors,
@@ -57,6 +68,9 @@ public class Activity {
     this.capacity = capacity;
     this.minSupervisors = minSupervisors;
     this.price = price;
+  }
+
+  public Activity(String name2, Date date2, int duration2, int capacity2, int minSupervisors2, double price2) {
   }
 
   public UUID getId() {

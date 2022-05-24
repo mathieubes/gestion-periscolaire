@@ -15,7 +15,7 @@ public class Allergen {
   private String name;
 
  //@ManyToMany(mappedBy = "allergens", cascade = CascadeType.ALL)
- @ManyToMany
+  @ManyToMany
   @JoinTable(name = "childallergens", 
   joinColumns = @JoinColumn(name = "code"), 
   inverseJoinColumns = @JoinColumn(name = "idChild"))
@@ -25,8 +25,8 @@ public class Allergen {
 
  @ManyToMany
   @JoinTable(name = "contenance_Aliment", 
-  joinColumns = @JoinColumn(name = "id_Allergen"), 
-  inverseJoinColumns = @JoinColumn(name = "id_Aliment"))
+  joinColumns = @JoinColumn(name = "code"), 
+  inverseJoinColumns = @JoinColumn(name = "id"))
   private List<Aliment> listAliment;
 
 

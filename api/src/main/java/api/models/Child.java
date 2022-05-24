@@ -33,14 +33,15 @@ public class Child {
   @Column(name = "date_of_birth", nullable = false)
   private Date birthDate;
 
-  @Column(name = "Gender")
+  @Enumerated(EnumType.STRING)
+  @Column(length = 24)
   private Gender gender;
 
   @ManyToOne
   @JoinColumn(name= "parent_id", nullable = false)
   private Parent parent;
 
-  @Column(name = "activity_list", nullable = false)
+  //@Column(name = "activity_list", nullable = false)
   @ManyToMany
   @JoinTable(name = "child_activities", 
   joinColumns = @JoinColumn(name = "idChild"), 

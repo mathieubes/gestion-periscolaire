@@ -5,6 +5,8 @@ import java.util.UUID;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE_PERSONNE")
 @Table(name = "users")
 public abstract class User {
 
