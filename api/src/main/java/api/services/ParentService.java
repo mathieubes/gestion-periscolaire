@@ -183,4 +183,17 @@ public class ParentService {
   }
   // #endregion
 
+  // #region Get total expenses
+  public double getTotalExpenses(String id) {
+    Parent parent = this.getParentByID(id);
+    Double sum = (double) 0;
+    for (Child child : parent.getChildren()) {
+      for (Activity activity : child.getActivities()) {
+        sum += activity.getPrice();
+      }
+    }
+
+    return sum / parent.getCoefNumber();
+  }
+  // #endregion
 }
