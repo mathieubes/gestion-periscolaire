@@ -10,6 +10,7 @@ import {
 import EscalatorWarningIcon from '@mui/icons-material/EscalatorWarning';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import DiningIcon from '@mui/icons-material/Dining';
+import SettingsIcon from '@mui/icons-material/Settings';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { AuthContext } from '../../contexts/auth-context';
 import { NavbarButton } from './navbar-button';
@@ -32,53 +33,34 @@ export const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     setParent!({} as IParent);
+    localStorage.removeItem('loggedUser');
     handleClose();
   };
 
   return (
     <div className="navbar">
       <nav>
-        <NavbarButton title="Home" icon={<HomeRoundedIcon />} to="/" />
+        <NavbarButton title="Dashboard" icon={<HomeRoundedIcon />} to="/" />
         <NavbarButton
-          title="My children"
+          title="Mes enfants"
           icon={<EscalatorWarningIcon />}
           to="/children"
         />
-        <NavbarButton
-          title="Activities"
-          icon={<SportsBasketballIcon />}
-          to="/actvities"
-        />
-        <NavbarButton title="Cafeteria" icon={<DiningIcon />} to="/cafeteria" />
       </nav>
 
-      <IconButton onClick={handleClick}>
-        <Avatar>{parent?.firstname[0]}</Avatar>
-      </IconButton>
-      <Menu
-        id="basic-menu"
-        anchorEl={menuEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-        anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'center',
-          horizontal: 'left',
-        }}
-      >
-        <MenuItem onClick={handleLogout}>
-          <ListItemIcon>
-            <PowerSettingsNewRoundedIcon />
-          </ListItemIcon>
-          <ListItemText>Se deconnecter</ListItemText>
-        </MenuItem>
-      </Menu>
+      <nav>
+        <NavbarButton
+          title="Modifier mes informations"
+          icon={<SettingsIcon />}
+          to="/account"
+        />
+
+        <NavbarButton
+          title="Se déconnecter"
+          icon={<PowerSettingsNewRoundedIcon />}
+          onClick={handleLogout}
+        />
+      </nav>
     </div>
   );
 };

@@ -41,7 +41,13 @@ export const Dashboard: React.FC<IProps> = ({ activities, totalExpenses }) => {
       </Card>
 
       <Card title="Prévisions des dépenses du mois">
-        {totalExpenses} &euro;
+        {totalExpenses ? (
+          <h2>
+            Votre facture du mois sera de {Math.floor(totalExpenses)}&euro;
+          </h2>
+        ) : (
+          <p>Vous n'avez pas de dépenses prévues</p>
+        )}
       </Card>
 
       <Card title="Accéder à mon espace">titi</Card>
