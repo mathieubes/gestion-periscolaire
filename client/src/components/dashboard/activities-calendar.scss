@@ -1,0 +1,17 @@
+.activities-calendar {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  margin-top: 32px;
+
+  &__row {
+    display: grid;
+    gap: 32px;
+    align-items: center;
+    overflow-x: auto;
+
+    &__date {
+      transform: rotate(-90deg);
+    }
+  }
+}

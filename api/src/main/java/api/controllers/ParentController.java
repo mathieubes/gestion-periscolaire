@@ -103,6 +103,7 @@ public class ParentController {
       @PathVariable String childId)
       throws JsonProcessingException {
     try {
+      System.out.println(childId);
       Child toReturn = parentService.updateChild(childPostDTO, id, childId);
       return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {
@@ -221,4 +222,15 @@ public class ParentController {
   }
   // #endregion
 
+  // #region Get total expenses
+  @RequestMapping(value = "/{id}/expenses", method = RequestMethod.GET)
+  public ResponseEntity<String> getParentExpenses(@PathVariable("id") String parentID) throws JsonProcessingException {
+    try {
+      String toReturn = this.objectMapper.writeValueAsString(this.parentService.getTotalExpenses(parentID));
+      return ResponseEntity.ok(toReturn);
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+  // #endregion
 }

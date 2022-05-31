@@ -1,0 +1,33 @@
+.children-page {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+
+  &__child {
+    background-color: rgba(0, 118, 187, 0.1);
+
+    &--girl {
+      background-color: rgba(187, 0, 112, 0.1);
+    }
+  }
+
+  &__add-child {
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 16px;
+
+      h3 {
+        display: inline-block;
+        color: #ccc;
+      }
+
+      &__form {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.navbar {
+  padding: 64px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 92px;
+  margin-right: 16px;
+  border-right: 1px solid #eee;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+}

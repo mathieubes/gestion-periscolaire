@@ -76,6 +76,7 @@ public class Child {
     this.lastname = childPostDTO.getLastname();
     this.birthDate = childPostDTO.getBirthDate();
     this.gender = childPostDTO.getGender();
+    this.dependent = childPostDTO.getDependent();
 
     return this;
   }

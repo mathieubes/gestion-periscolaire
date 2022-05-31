@@ -12,10 +12,6 @@ public class Menu {
     this.id = UUID.randomUUID();
   }
 
-  public Menu() {
-
-  }
-
   public ArrayList<Aliment> getAliments() {
     return this.aliments;
   }

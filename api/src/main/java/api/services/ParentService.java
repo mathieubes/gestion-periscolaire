@@ -39,9 +39,15 @@ public class ParentService {
     addParent(new UserPostDTO("Fawaz", "MOUSSOUGAN", "pwdTest4", "criminal@gmail.fr", "unknown", "Call the police"));
 
     final var florian = addParent(
-        new UserPostDTO("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218"));
+        new UserPostDTO("Florian", "CARBONI", "pwdTest3", "test@test.fr", "versRis", "118 218"));
     florian.addChild(new ChildPostDTO("Pedro", "Italian", new Date(), Gender.MALE, true));
     florian.addChild(new ChildPostDTO("Sara", "Mexican", new Date(), Gender.FEMALE, false));
+  }
+
+  @PostConstruct
+  private void initFakeCoefNumber() {
+    Parent parentFlorian = this.getParentByEmail("test@test.fr");
+    parentFlorian.getCoefNumber(15000);
   }
 
   // #region Get parents
@@ -53,6 +59,13 @@ public class ParentService {
   // #region Get parent by Id
   public Parent getParentByID(String id) {
     return this.parents.stream().filter(parent -> UUID.fromString(id).equals(parent.getId())).findFirst()
+        .orElse(null);
+  }
+  // #endregion
+
+  // #region Get parent by email
+  public Parent getParentByEmail(String email) {
+    return this.parents.stream().filter(parent -> email.equals(parent.getEmail())).findFirst()
         .orElse(null);
   }
   // #endregion
@@ -183,4 +196,22 @@ public class ParentService {
   }
   // #endregion
 
+  // #region Get total expenses
+  public double getTotalExpenses(String id) {
+    Parent parent = this.getParentByID(id);
+    if (parent.getAnnualIncome() == 0) {
+      return -1;
+    } else {
+      Double sum = (double) 0;
+      for (Child child : parent.getChildren()) {
+        for (Activity activity : child.getActivities()) {
+          sum += activity.getPrice();
+        }
+      }
+
+      return (sum * parent.getCoefNumber()) / 100;
+    }
+
+  }
+  // #endregion
 }
