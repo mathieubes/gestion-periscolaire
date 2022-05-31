@@ -19,10 +19,6 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
 
   const [parent, setParent] = useState<IParent>(user);
 
-  useEffect(() => {
-    localStorage.setItem('loggedUser', JSON.stringify(parent));
-  }, [parent]);
-
   return (
     <AuthContext.Provider value={{ parent, setParent }}>
       {children}

@@ -27,8 +27,14 @@ export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const [remember, setRemember] = useState<boolean>(false);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [hasErrors, setHasErrors] = useState<boolean>(false);
+
+  const handleRememberMeButton = () => {
+    setRemember((r) => !r);
+  };
 
   const handleSignInButtonClick = async (e: any) => {
     e.preventDefault();
@@ -43,7 +49,9 @@ export const LoginPage: React.FC = () => {
       body
     );
     if (res.data) {
-      setParent!(res.data);
+      const parent = res.data;
+      setParent!(parent);
+      if (remember) localStorage.setItem('loggedUser', JSON.stringify(parent));
       navigate('/');
     } else setHasErrors(true);
 
@@ -72,7 +80,7 @@ export const LoginPage: React.FC = () => {
         />
         <OutlinedInput
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
           startAdornment={
             <InputAdornment position="start">
               <PasswordRoundedIcon />
@@ -84,16 +92,22 @@ export const LoginPage: React.FC = () => {
         />
         <FormControlLabel
           style={{ alignSelf: 'start' }}
-          control={<Checkbox size="small" />}
-          label="Remember me"
+          control={
+            <Checkbox
+              size="small"
+              checked={remember}
+              onChange={handleRememberMeButton}
+            />
+          }
+          label="Se souvenir de moi"
         />
 
         <div className="login-page__form__buttons">
           <LoadingButton type="submit" variant="contained" loading={loading}>
-            Sign in
+            Connexion
           </LoadingButton>
           <Button size="small" onClick={handleSignUpButtonClick}>
-            Sign up
+            Inscription
           </Button>
         </div>
       </form>
