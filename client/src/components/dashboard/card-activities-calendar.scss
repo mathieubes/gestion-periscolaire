@@ -2,6 +2,15 @@
   padding: 24px 64px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(#333, 0.05);
+  }
+
+  &--registered {
+    background-color: rgba(rgb(17, 193, 17), 0.1);
+  }
 
   p {
     font-size: 12px;

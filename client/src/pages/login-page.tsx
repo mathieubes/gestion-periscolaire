@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   Button,
   FormControlLabel,
@@ -32,6 +32,22 @@ export const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [hasErrors, setHasErrors] = useState<boolean>(false);
 
+  useEffect(() => {
+    const rem = localStorage.getItem('loggedUser');
+    if (rem) logUser(rem);
+  }, []);
+
+  const logUser = async (body: string) => {
+    const res = await axios.post<IParent>(
+      'http://localhost:8080/users/parents/signin',
+      JSON.parse(body)
+    );
+    if (res.data) {
+      setParent!(res.data);
+    }
+    navigate('/');
+  };
+
   const handleRememberMeButton = () => {
     setRemember((r) => !r);
   };
@@ -51,7 +67,7 @@ export const LoginPage: React.FC = () => {
     if (res.data) {
       const parent = res.data;
       setParent!(parent);
-      if (remember) localStorage.setItem('loggedUser', JSON.stringify(parent));
+      if (remember) localStorage.setItem('loggedUser', JSON.stringify(body));
       navigate('/');
     } else setHasErrors(true);
 

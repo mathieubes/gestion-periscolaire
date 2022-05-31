@@ -39,14 +39,14 @@ public class ParentService {
     addParent(new UserPostDTO("Fawaz", "MOUSSOUGAN", "pwdTest4", "criminal@gmail.fr", "unknown", "Call the police"));
 
     final var florian = addParent(
-        new UserPostDTO("Florian", "CARBONI", "pwdTest3", "bgDeL'IBGBI@gmail.fr", "versRis", "118 218"));
+        new UserPostDTO("Florian", "CARBONI", "pwdTest3", "test@test.fr", "versRis", "118 218"));
     florian.addChild(new ChildPostDTO("Pedro", "Italian", new Date(), Gender.MALE, true));
     florian.addChild(new ChildPostDTO("Sara", "Mexican", new Date(), Gender.FEMALE, false));
   }
 
   @PostConstruct
   private void initFakeCoefNumber() {
-    Parent parentFlorian = this.getParentByEmail("bgDeL'IBGBI@gmail.fr");
+    Parent parentFlorian = this.getParentByEmail("test@test.fr");
     parentFlorian.getCoefNumber(10000);
   }
 

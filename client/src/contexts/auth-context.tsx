@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, createContext, useEffect } from 'react';
 import { IParent } from '../models/parent';
 
@@ -13,11 +14,7 @@ interface IProps {
 }
 
 export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
-  const user = JSON.parse(
-    localStorage.getItem('loggedUser') || '{}'
-  ) as IParent;
-
-  const [parent, setParent] = useState<IParent>(user);
+  const [parent, setParent] = useState<IParent>({} as IParent);
 
   return (
     <AuthContext.Provider value={{ parent, setParent }}>
