@@ -47,7 +47,7 @@ public class ParentService {
   @PostConstruct
   private void initFakeCoefNumber() {
     Parent parentFlorian = this.getParentByEmail("test@test.fr");
-    parentFlorian.getCoefNumber(10000);
+    parentFlorian.getCoefNumber(15000);
   }
 
   // #region Get parents

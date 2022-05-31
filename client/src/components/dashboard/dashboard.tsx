@@ -6,9 +6,6 @@ import { Card } from '../common/card';
 import { ActivitiesCalendar } from './activities-calendar';
 import './dashboard.scss';
 
-const TMP_CHILD_IMG =
-  'https://images.unsplash.com/photo-1629783509182-68c8c190e952?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80';
-
 interface IProps {
   activities: IActivity[];
   totalExpenses: number;
@@ -29,23 +26,18 @@ export const Dashboard: React.FC<IProps> = ({ activities, totalExpenses }) => {
       <Card title="Activités à venir">
         <Tabs value={selectedChild} onChange={handleChange}>
           {children.map(({ firstname }) => (
-            <Tab
-              icon={
-                <img
-                  style={{ width: 32, height: 32, borderRadius: 16 }}
-                  src={TMP_CHILD_IMG}
-                />
-              }
-              iconPosition="start"
-              label={firstname}
-            />
+            <Tab iconPosition="start" label={firstname} />
           ))}
         </Tabs>
 
-        <ActivitiesCalendar
-          allActivities={activities}
-          child={children[selectedChild]}
-        />
+        {children.length ? (
+          <ActivitiesCalendar
+            allActivities={activities}
+            child={children[selectedChild]}
+          />
+        ) : (
+          <h3>Vous n'avez pas d'enfants renseigné</h3>
+        )}
       </Card>
 
       <Card title="Prévisions des dépenses du mois">

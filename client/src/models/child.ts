@@ -4,8 +4,8 @@ export interface IChild {
   id: string;
   firstname: string;
   lastname: string;
-  birthDate: Date;
-  gender: number;
+  birthDate: number;
+  gender: string;
   dependent: boolean;
   activities: IActivity[];
 }

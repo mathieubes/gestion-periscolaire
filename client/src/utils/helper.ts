@@ -15,4 +15,16 @@ export class Helper {
       month: 'long',
     });
   }
+
+  static getLitteralBirthDate(date: number) {
+    return new Date(date).toLocaleDateString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  }
+
+  static toDateInput(date: number) {
+    return this.getLitteralBirthDate(date).split('/').reverse().join('-');
+  }
 }

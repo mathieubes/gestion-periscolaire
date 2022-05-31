@@ -103,6 +103,7 @@ public class ParentController {
       @PathVariable String childId)
       throws JsonProcessingException {
     try {
+      System.out.println(childId);
       Child toReturn = parentService.updateChild(childPostDTO, id, childId);
       return ResponseEntity.ok(this.objectMapper.writeValueAsString(toReturn));
     } catch (Exception e) {

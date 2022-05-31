@@ -6,8 +6,6 @@ import { LoginPage } from './pages/login-page';
 import { RegisterPage } from './pages/register-page';
 import { HomePage } from './pages/home-page';
 import { ChildrenPage } from './pages/children-page';
-import { ActivitiesPage } from './pages/activites-page';
-import { CafeteriaPage } from './pages/cafetera-page';
 
 export const App: React.FC = () => {
   return (
@@ -17,8 +15,6 @@ export const App: React.FC = () => {
           <Route path="/" element={<AuthProtectedRoute />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/children" element={<ChildrenPage />} />
-            <Route path="/actvities" element={<ActivitiesPage />} />
-            <Route path="/cafeteria" element={<CafeteriaPage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />
