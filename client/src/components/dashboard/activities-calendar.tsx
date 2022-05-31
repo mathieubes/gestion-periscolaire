@@ -12,12 +12,13 @@ interface IProps {
 export const ActivitiesCalendar: React.FC<IProps> = ({ allActivities }) => {
   return (
     <div className="activities-calendar">
-      {allActivities.map(({ date, activities }) => {
+      {allActivities.map(({ date, activities }, i) => {
         return (
-          <div className="activities-calendar__row">
+          <div key={i} className="activities-calendar__row">
             <div className="activities-calendar__row__date">{date}</div>
-            {activities.map(({ title, start, end, date }) => (
+            {activities.map(({ title, start, end, date }, j) => (
               <CardActivitiesCalendar
+                key={j}
                 title={title}
                 start={start}
                 end={end}
