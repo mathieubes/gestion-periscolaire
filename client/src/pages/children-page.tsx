@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { Helper } from '../utils/helper';
+import { IChild } from '../models/child';
 
 export const ChildrenPage: React.FC = () => {
   const { parent } = useContext(AuthContext);
@@ -47,15 +48,23 @@ export const ChildrenPage: React.FC = () => {
     };
     if (editMode) {
       const child = parent?.children[selectedChild];
-      await axios.post(
+      const res = await axios.post(
         `http://localhost:8080/users/parents/${parent?.id}/children/${child?.id}/update`,
         body
       );
+
+      if (res.data) {
+        parent!.children[selectedChild] = res.data;
+      }
     } else {
-      await axios.post(
+      const res = await axios.post<IChild[]>(
         `http://localhost:8080/users/parents/${parent?.id}/children`,
         body
       );
+
+      if (res.data) {
+        parent!.children = res.data;
+      }
     }
 
     handleClose();
