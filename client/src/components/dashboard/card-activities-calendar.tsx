@@ -82,7 +82,10 @@ export const CardActivitiesCalendar: React.FC<IProps> = ({
       </Card>
 
       <Dialog open={open} onClose={handleClose} fullWidth={true}>
-        <DialogTitle>Confirmation d'inscription à l'activité</DialogTitle>
+        <DialogTitle>
+          Confirmation {reg ? 'de désinscription' : `d'inscription`} à
+          l'activité
+        </DialogTitle>
         <DialogContent>
           Êtes-vous sûr de vouloir {reg ? 'désinscrire' : 'inscrire'} votre
           enfant à cette activité ?

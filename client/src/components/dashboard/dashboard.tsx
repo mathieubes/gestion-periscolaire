@@ -64,17 +64,23 @@ export const Dashboard: React.FC<IProps> = ({
         {children.length === 0 && <h3>Vous n'avez pas d'enfants renseigné</h3>}
       </Card>
 
-      <Card title="Prévisions des dépenses du mois">
+      <Card title="Prévisions des dépenses du mois" center>
         {totalExpenses ? (
-          <h2>
-            Votre facture du mois sera de {Math.floor(totalExpenses)}&euro;
-          </h2>
+          <p>
+            {totalExpenses === -1 ? (
+              `Renseignez d'abord vos revenus annuels dans vos informations`
+            ) : (
+              <>
+                Votre facture du mois sera de {Math.floor(totalExpenses)}&euro;
+              </>
+            )}
+          </p>
         ) : (
           <p>Vous n'avez pas de dépenses prévues</p>
         )}
       </Card>
 
-      <Card title="Consulter ma facture">t</Card>
+      <Card title="Consulter ma facture">Prochainement...</Card>
     </div>
   );
 };
