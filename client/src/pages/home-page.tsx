@@ -41,7 +41,11 @@ export const HomePage: React.FC = () => {
         Bonjour {parent?.firstname} {parent?.lastname}
       </h1>
 
-      <Dashboard activities={activities} totalExpenses={totalExpenses} />
+      <Dashboard
+        activities={activities}
+        totalExpenses={totalExpenses}
+        updateExpenses={getExpenses}
+      />
     </>
   );
 };

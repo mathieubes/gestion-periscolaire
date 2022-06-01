@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Button,
   FormControlLabel,
@@ -17,22 +17,34 @@ import FamilyRestroomRoundedIcon from '@mui/icons-material/FamilyRestroomRounded
 import FaceRoundedIcon from '@mui/icons-material/FaceRounded';
 import MyLocationRoundedIcon from '@mui/icons-material/MyLocationRounded';
 import PhoneIphoneRoundedIcon from '@mui/icons-material/PhoneIphoneRounded';
+import AccountBalanceWalletRoundedIcon from '@mui/icons-material/AccountBalanceWalletRounded';
 import './login-page.scss';
+import './informations-page.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../contexts/auth-context';
 
-export const RegisterPage = () => {
+export const InformationsPage = () => {
+  const { parent } = useContext(AuthContext);
+
+  const logs = JSON.parse(localStorage.getItem('loggedUser')!);
+
   const navigate = useNavigate();
 
-  const [firstname, setFirstname] = useState<string>();
-  const [lastname, setLastname] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [confirmedPassword, setConfirmedPassword] = useState<string>();
-  const [address, setAddress] = useState<string>();
-  const [phoneNumber, setPhoneNumber] = useState<string>();
+  const [firstname, setFirstname] = useState<string>(parent!.firstname);
+  const [lastname, setLastname] = useState<string>(parent!.lastname);
+  const [email, setEmail] = useState<string>(parent!.email);
+  const [password, setPassword] = useState<string>(logs.password);
+  const [confirmedPassword, setConfirmedPassword] = useState<string>(
+    logs.password
+  );
+  const [address, setAddress] = useState<string>(parent!.address);
+  const [phoneNumber, setPhoneNumber] = useState<string>(parent!.phoneNumber);
+  const [annualIncome, setAnnualIncome] = useState<string>(
+    parent!.annualIncome.toString()
+  );
 
-  const [hasErrors, setHasErrors] = useState<boolean>();
+  const [infos, setInfos] = useState<boolean>();
 
   const handleSignUpButtonClick = async () => {
     const body = {
@@ -44,14 +56,26 @@ export const RegisterPage = () => {
       phoneNumber,
     };
 
-    axios.post('http://localhost:8080/users/parents', body);
+    axios.post(
+      `http://localhost:8080/users/parents/${parent?.id}/update`,
+      body
+    );
+
+    setInfos(true);
+  };
+
+  const handleUpdateCoef = async () => {
+    axios.get(
+      `http://localhost:8080/users/parents/${parent?.id}/fiscal?annualIncome=${annualIncome}`
+    );
+    setInfos(true);
   };
 
   return (
-    <main className="login-page">
+    <main className="login-page informations-page">
       <form onSubmit={handleSignUpButtonClick}>
         <Stack direction="column" gap="16px">
-          <Typography variant="h4">Inscription</Typography>
+          <Typography variant="h4">Mes informations</Typography>
           <Stack direction="row" gap="16px">
             <OutlinedInput
               type="text"
@@ -63,7 +87,6 @@ export const RegisterPage = () => {
               }
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
-              error={hasErrors}
             />
             <OutlinedInput
               type="text"
@@ -75,7 +98,6 @@ export const RegisterPage = () => {
               }
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
-              error={hasErrors}
             />
           </Stack>
 
@@ -89,7 +111,6 @@ export const RegisterPage = () => {
             }
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="password"
@@ -101,7 +122,6 @@ export const RegisterPage = () => {
             }
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="password"
@@ -113,7 +133,6 @@ export const RegisterPage = () => {
             }
             value={confirmedPassword}
             onChange={(e) => setConfirmedPassword(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="text"
@@ -125,7 +144,6 @@ export const RegisterPage = () => {
             }
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="tel"
@@ -137,30 +155,48 @@ export const RegisterPage = () => {
             }
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            error={hasErrors}
           />
 
           <div className="login-page__form__buttons">
             <Button variant="contained" onClick={handleSignUpButtonClick}>
-              S'inscrire
+              Mettre à jour mes informations
             </Button>
-            <Button onClick={() => navigate('/login')}>
-              J'ai déjà un compte
+          </div>
+        </Stack>
+      </form>
+
+      <form>
+        <Stack gap="16px">
+          <OutlinedInput
+            type="number"
+            placeholder="Revenus annuel"
+            startAdornment={
+              <InputAdornment position="start">
+                <AccountBalanceWalletRoundedIcon />
+              </InputAdornment>
+            }
+            value={annualIncome}
+            onChange={(e) => setAnnualIncome(e.target.value)}
+          />
+
+          <div className="login-page__form__buttons">
+            <Button variant="contained" onClick={handleUpdateCoef}>
+              Mettre à jour mon coeficiant
             </Button>
           </div>
         </Stack>
       </form>
       <Snackbar
-        open={hasErrors}
+        open={infos}
         autoHideDuration={5000}
-        onClose={() => setHasErrors(false)}
+        onClose={() => setInfos(false)}
       >
         <Alert
-          severity="error"
+          severity="success"
           sx={{ width: '100%' }}
           icon={<WarningAmberIcon />}
         >
-          Email ou mot de passe incorrects.
+          Changements pris en compte.
         </Alert>
       </Snackbar>
     </main>
