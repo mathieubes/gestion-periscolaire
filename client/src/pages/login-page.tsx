@@ -60,16 +60,21 @@ export const LoginPage: React.FC = () => {
       email,
       password,
     };
-    const res = await axios.post<IParent>(
-      'http://localhost:8080/users/parents/signin',
-      body
-    );
-    if (res.data) {
-      const parent = res.data;
-      setParent!(parent);
-      if (remember) localStorage.setItem('loggedUser', JSON.stringify(body));
-      navigate('/');
-    } else setHasErrors(true);
+
+    axios
+      .post<IParent>('http://localhost:8080/users/parents/signin', body)
+      .then((res) => {
+        if (res.data) {
+          const parent = res.data;
+          setParent!(parent);
+          if (remember)
+            localStorage.setItem('loggedUser', JSON.stringify(body));
+          navigate('/');
+        }
+      })
+      .catch(() => {
+        setHasErrors(true);
+      });
 
     setLoading(false);
   };
