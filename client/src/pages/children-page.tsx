@@ -76,6 +76,8 @@ export const ChildrenPage: React.FC = () => {
       `http://localhost:8080/users/parents/${parent?.id}/children/${child?.id}`
     );
 
+    parent!.children = parent.children.filter((c) => c.id != child.id);
+
     handleClose();
   };
 
