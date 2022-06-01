@@ -74,10 +74,7 @@ export const Dashboard: React.FC<IProps> = ({
         )}
       </Card>
 
-      <Card title="Accéder à mon espace">titi</Card>
-      <Card title="Gérer mes enfants">tutu</Card>
-      <Card title="Réaliser une inscription">tutu</Card>
-      <Card title="Consulter ma dernière facture">tutu</Card>
+      <Card title="Consulter ma facture">t</Card>
     </div>
   );
 };
