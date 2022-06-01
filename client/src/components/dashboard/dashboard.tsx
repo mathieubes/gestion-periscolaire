@@ -1,5 +1,7 @@
+import { ConstructionOutlined } from '@mui/icons-material';
 import { Tab, Tabs, Button } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/auth-context';
 import { IActivity } from '../../models/activity';
 import { Card } from '../common/card';
@@ -21,10 +23,24 @@ export const Dashboard: React.FC<IProps> = ({
   const { children } = parent!;
 
   const [selectedChild, setSelectedChild] = useState<number>(0);
+  const [coef, setCoef] = useState<number>(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedChild(newValue);
   };
+
+  const updateCoef = async () => {
+    const res = await axios.get(
+      `http://localhost:8080/users/parents/${parent.id}/fiscal?annualIncome=${parent.annualIncome}`
+    );
+
+    setCoef(res.data);
+    parent.coefNumber = res.data;
+  };
+
+  useEffect(() => {
+    updateCoef();
+  });
 
   interface TabPanelProps {
     children?: React.ReactNode;
@@ -72,6 +88,7 @@ export const Dashboard: React.FC<IProps> = ({
             ) : (
               <>
                 Votre facture du mois sera de {Math.floor(totalExpenses)}&euro;
+                <p>(coef: {coef}% de la somme)</p>
               </>
             )}
           </p>
