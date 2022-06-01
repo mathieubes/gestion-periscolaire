@@ -1,4 +1,4 @@
-import { Tab, Tabs } from '@mui/material';
+import { Tab, Tabs, Button } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/auth-context';
 import { IActivity } from '../../models/activity';
@@ -9,9 +9,14 @@ import './dashboard.scss';
 interface IProps {
   activities: IActivity[];
   totalExpenses: number;
+  updateExpenses: () => void;
 }
 
-export const Dashboard: React.FC<IProps> = ({ activities, totalExpenses }) => {
+export const Dashboard: React.FC<IProps> = ({
+  activities,
+  totalExpenses,
+  updateExpenses,
+}) => {
   const { parent } = useContext(AuthContext);
   const { children } = parent!;
 
@@ -20,6 +25,22 @@ export const Dashboard: React.FC<IProps> = ({ activities, totalExpenses }) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setSelectedChild(newValue);
   };
+
+  interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+  }
+
+  function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div hidden={value !== index} {...other}>
+        {value === index && <>{children}</>}
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard">
@@ -30,14 +51,17 @@ export const Dashboard: React.FC<IProps> = ({ activities, totalExpenses }) => {
           ))}
         </Tabs>
 
-        {children.length ? (
-          <ActivitiesCalendar
-            allActivities={activities}
-            child={children[selectedChild]}
-          />
-        ) : (
-          <h3>Vous n'avez pas d'enfants renseigné</h3>
-        )}
+        {children.map((child, i) => (
+          <TabPanel key={i} value={selectedChild} index={i}>
+            <ActivitiesCalendar
+              allActivities={activities}
+              child={child}
+              updateExpenses={updateExpenses}
+            />
+          </TabPanel>
+        ))}
+
+        {children.length === 0 && <h3>Vous n'avez pas d'enfants renseigné</h3>}
       </Card>
 
       <Card title="Prévisions des dépenses du mois">
