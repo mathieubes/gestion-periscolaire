@@ -22,8 +22,7 @@ public class ActivityService {
 
   @PostConstruct
   private void initFakeActivities() {
-    addActivity(new ActivityPostDTO("Test activity", new Date(), 60, 20, 1, 25.0));
-    addSport(new ActivityPostDTO("Football", new Date(), 120, 22, 2, 30), 8, Difficulty.BEGINNER);
+    addSport(new ActivityPostDTO("Football", new Date(), 120, 22, 2, 20), 8, Difficulty.BEGINNER);
     addCafeteria(new ActivityPostDTO("Cafeteria", new Date(), 60, 150, 5, 5));
   }
 

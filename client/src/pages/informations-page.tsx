@@ -181,7 +181,7 @@ export const InformationsPage = () => {
 
           <div className="login-page__form__buttons">
             <Button variant="contained" onClick={handleUpdateCoef}>
-              Mettre à jour mon coeficiant
+              Mettre à jour mes revenus
             </Button>
           </div>
         </Stack>

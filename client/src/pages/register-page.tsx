@@ -45,6 +45,7 @@ export const RegisterPage = () => {
     };
 
     axios.post('http://localhost:8080/users/parents', body);
+    setHasErrors(true);
   };
 
   return (
@@ -63,7 +64,6 @@ export const RegisterPage = () => {
               }
               value={lastname}
               onChange={(e) => setLastname(e.target.value)}
-              error={hasErrors}
             />
             <OutlinedInput
               type="text"
@@ -75,7 +75,6 @@ export const RegisterPage = () => {
               }
               value={firstname}
               onChange={(e) => setFirstname(e.target.value)}
-              error={hasErrors}
             />
           </Stack>
 
@@ -89,7 +88,6 @@ export const RegisterPage = () => {
             }
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="password"
@@ -101,7 +99,6 @@ export const RegisterPage = () => {
             }
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="password"
@@ -113,7 +110,6 @@ export const RegisterPage = () => {
             }
             value={confirmedPassword}
             onChange={(e) => setConfirmedPassword(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="text"
@@ -125,7 +121,6 @@ export const RegisterPage = () => {
             }
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            error={hasErrors}
           />
           <OutlinedInput
             type="tel"
@@ -137,7 +132,6 @@ export const RegisterPage = () => {
             }
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            error={hasErrors}
           />
 
           <div className="login-page__form__buttons">
@@ -152,15 +146,15 @@ export const RegisterPage = () => {
       </form>
       <Snackbar
         open={hasErrors}
-        autoHideDuration={5000}
-        onClose={() => setHasErrors(false)}
+        autoHideDuration={2000}
+        onClose={() => navigate('/login')}
       >
         <Alert
-          severity="error"
+          severity="success"
           sx={{ width: '100%' }}
           icon={<WarningAmberIcon />}
         >
-          Email ou mot de passe incorrects.
+          Compte créé.
         </Alert>
       </Snackbar>
     </main>

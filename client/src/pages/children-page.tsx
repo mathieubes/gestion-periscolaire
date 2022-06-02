@@ -175,7 +175,7 @@ export const ChildrenPage: React.FC = () => {
             </Button>
           )}
 
-          <Button onClick={handleChildRegister}>
+          <Button onClick={handleChildRegister} variant="contained">
             {editMode ? 'Mettre à jour' : 'Ajouter'} mon enfant
           </Button>
         </DialogActions>
